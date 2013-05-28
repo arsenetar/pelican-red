@@ -1,0 +1,123 @@
+// 
+// RangerTBC Style Components
+//
+
+// Topbar Component components/_topbar.scss
+// Version: 0.1
+// Created By: Andrew Senetar
+// Date: May, 22 2013
+// Used: Foundation Topbar as starting point
+
+//// Top Bar Variables
+
+// Background color for the top bar
+$topbar-bg: rgba($primary-color,0.9) !default;
+
+// Height and margin
+$topbar-height: 45px !default;
+$topbar-margin-bottom: 0px !default;
+
+//Shadow Color
+$topbar-shadow-color: rgba(50, 50, 50, 0.4) !default;
+
+// Controlling the styles for the title in the top bar
+$topbar-title-weight:                  bold !default;
+$topbar-title-font-size:               emCalc(17px) !default;
+
+// Set the link colors and styles for top-level nav
+$topbar-link-color:                    #fff !default;
+$topbar-link-color-hover:              #fff !default;
+$topbar-link-color-active:             #fff !default;
+$topbar-link-weight:                   bold !default;
+$topbar-link-font-size:                emCalc(13px) !default;
+$topbar-link-hover-lightness:          -10% !default; // Darken by 10%
+
+//// Top Bar Style
+
+.top-bar {
+  overflow: hidden;
+  height: $topbar-height;
+  line-height: $topbar-height;
+  max-width: none;
+  background: $topbar-bg;
+  position: relative;
+  margin-bottom: $topbar-margin-bottom;
+  @include box-shadow(0 5px 5px $topbar-shadow-color);
+    
+  // Topbar Global list style
+  ul {
+    margin-bottom: 0;
+    list-style: none;
+  }
+  
+  .title-area { 
+    float: left;
+    position: relative; 
+    height: $topbar-height;
+    margin: 0;
+    line-height: $topbar-height;
+    font-size: $topbar-title-font-size;
+    margin: 0;
+    a {
+      font-weight: $topbar-title-weight;
+      color: $topbar-link-color;
+      width: auto;
+      display: block;
+      padding: 0 $topbar-height / 3;
+      &:hover{
+        color: $topbar-link-color-hover;
+      }
+      &:active{
+        color: $topbar-link-color-active;
+      }
+    }
+  }
+  
+  .social-area {
+    float: right;
+    width: auto;
+    height: auto;
+    display: inline;
+    li {
+      float: left;
+      a {
+        display: block;
+        color: $topbar-link-color;
+        height: $topbar-height;
+        line-height: $topbar-height;
+        width: 100%;
+        padding: 0 $topbar-height / 5;
+        font-size: $topbar-link-font-size;
+        font-weight: $topbar-link-weight;
+        &:hover { background: adjust-color($topbar-bg, $lightness: $topbar-link-hover-lightness); }
+      }
+    }
+  }
+}
+
+/// Fixed Topbar (at end to override default position)
+
+[class="fixed top-bar"] {
+  width: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  margin-bottom: 0;
+  z-index: 99;
+}
+
+/// Print Styles
+
+@media print{
+  .top-bar{
+    position: relative;  // stop from appearing all over the place when fixed
+    .title-area { 
+      i{
+        display: none; // no need to show menu button
+      }
+    }
+    .social-area{
+      display: none; // these icons are uesless as well
+    }
+  }
+}

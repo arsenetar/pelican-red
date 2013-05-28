@@ -1,0 +1,50 @@
+// 
+// RangerTBC Specific Styles 
+//
+
+// Settings File _settings.scss
+// Version: 0.1
+// Created By: Andrew Senetar
+// Date: May, 22 2013
+// Used: 
+
+//// External Imports
+
+/// Compass (reason in comment)
+@import "compass/css3/box-shadow";      // Used by topbar and ...
+@import "compass/css3/border-radius";   // Used by ...
+@import "compass/css3/text-shadow";     // Used by ...
+
+/// Foundation (reason in comment)
+@import "foundation/components/global"; // Global Foundation (required for any foundation)
+@import "foundation/components/grid";   // Foundation Grid (styles are used in layout using grid)
+@import "foundation/components/type";   // The typography styles are nice
+@import "foundation/components/clearing";  // Not sure by seems to help?
+@import "foundation/components/panels";
+
+//// Variables
+$body-bg: #e5e5e5;
+
+/// Topbar (defaults shown)
+
+// Background color for the top bar
+// $topbar-bg: rgba($primary-color,0.9);
+
+// Height and margin
+$topbar-height: 45px; //referenced to setup body margin atm
+// $topbar-margin-bottom: 0;
+
+//Shadow Color
+// $topbar-shadow-color: rgba(50, 50, 50, 0.4);
+
+// Controlling the styles for the title in the top bar
+// $topbar-title-weight:                  bold;
+// $topbar-title-font-size:               emCalc(17px);
+
+// Set the link colors and styles for top-level nav
+// $topbar-link-color:                    #fff;
+// $topbar-link-color-hover:              #fff;
+// $topbar-link-color-active:             #fff;
+// $topbar-link-weight:                   bold;
+// $topbar-link-font-size:                emCalc(13px);
+// $topbar-link-hover-lightness:          -10%; 

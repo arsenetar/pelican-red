@@ -1,0 +1,813 @@
+// 
+// Sass Icon Fonts
+//
+
+// Main File icons.scss
+// Version: 0.2
+// Created By: Andrew Senetar
+// Date: May, 19 2013
+// Used: Font Awesome Styles, Foundation Icon Fonts Scss as Starting; animation from Fontello
+
+@import "iconSettings"; 
+
+@include face(#{$set}); //@font-face 
+
+//// global icon styles (from Foundation Icons + Font Awesome)
+
+[class*="#{$classPrefix}"] {
+  background-image: none;
+  background-position: 0% 0%;
+  background-repeat: repeat;
+  display: inline;
+  height: auto;
+  width: auto;
+  vertical-align: baseline;
+  line-height: 1;
+  margin-top: 0;
+  speak: none;
+  font-family: '#{$set}';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+[class*="#{$classPrefix}"]:before {
+  text-decoration: inherit;
+  display: inline-block;
+  speak: none;
+}
+
+//// Icon borders (from Font Awesome)
+
+[class*="border #{$classPrefix}"] {
+  border: solid 1px $iconBorderColor;
+  padding: .2em .25em .15em;
+  @include border-radius(3px);
+}
+
+//// Icon sizes (from Font Awesome)
+
+[class*="large #{$classPrefix}"]:before {
+  vertical-align: -10%;
+  font-size: 1.333em;
+}
+
+[class*="huge #{$classPrefix}"]:before {
+  vertical-align: -17%;
+  font-size: 1.75em;
+}
+
+[class*="2x #{$classPrefix}"] {
+  font-size: 2em;
+  & .border {
+    border-width: 2px;
+    @include border-radius(4px);
+  }
+}
+
+[class*="3x #{$classPrefix}"] {
+  font-size: 3em;
+  & .border {
+    border-width: 3px;
+    @include border-radius(5px);
+  }
+}
+
+[class*="4x #{$classPrefix}"] {
+  font-size: 4em;
+  & .border {
+    border-width: 4px;
+    @include border-radius(6px);
+  }
+}
+
+[class*="5x #{$classPrefix}"] {
+  font-size: 5em;
+  & .border {
+    border-width: 5px;
+    @include border-radius(7px);
+  }
+}
+
+//// Colors (from Font Awesome) 
+
+[class*="muted #{$classPrefix}"]{
+  color: $iconMuted;
+}
+
+[class*="light #{$classPrefix}"]{
+  color: $iconLight;
+}
+
+[class*="dark #{$classPrefix}"]{
+  color: $iconDark;
+}
+
+//// Fixes
+
+//// makes sure icons active on rollover in links (from Font Awesome)
+
+a [class*="#{$classPrefix}"]:before {
+  display: inline;
+}
+
+//// Animation for Spinners (from Fontello)
+
+@include keyframes(spin){
+  0%{
+    @include transform(rotate(0deg));
+  }
+  100%{
+    @include transform(rotate(359deg));
+  }
+}
+
+.animate-spin{
+  @include animation(spin 2s infinite linear);
+}
+
+//// Actual Icons 
+
+@include i-class('duckduckgo','a15');
+@include i-class('aim','a16');
+@include i-class('delicious','a17');
+@include i-class('paypal-1','a18');
+@include i-class('flattr-1','a19');
+@include i-class('android','a1a');
+@include i-class('eventful','a1b');
+@include i-class('smashmag','a1c');
+@include i-class('gplus-2','a1d');
+@include i-class('plus','816');
+@include i-class('plus-1','936');
+@include i-class('wikipedia','a1e');
+@include i-class('lanyrd','a1f');
+@include i-class('minus','819');
+@include i-class('minus-1','938');
+@include i-class('calendar-2','a20');
+@include i-class('stumbleupon-1','a21');
+@include i-class('fivehundredpx','a22');
+@include i-class('pinterest-1','a23');
+@include i-class('bitcoin','a24');
+@include i-class('w3c','a25');
+@include i-class('foursquare','a26');
+@include i-class('html5','a27');
+@include i-class('ie','a28');
+@include i-class('call','a29');
+@include i-class('grooveshark','a2a');
+@include i-class('ninetyninedesigns','a2b');
+@include i-class('forrst','a2c');
+@include i-class('digg','a2d');
+@include i-class('spotify-1','a2e');
+@include i-class('reddit','a2f');
+@include i-class('guest','a30');
+@include i-class('gowalla','a31');
+@include i-class('at','a9d');
+@include i-class('appstore','a32');
+@include i-class('blogger','a33');
+@include i-class('cc-1','a34');
+@include i-class('dribbble-1','a35');
+@include i-class('evernote-1','a36');
+@include i-class('flickr-1','a37');
+@include i-class('google','a38');
+@include i-class('viadeo','a39');
+@include i-class('instapaper','a3a');
+@include i-class('weibo','a3b');
+@include i-class('klout','a3c');
+@include i-class('linkedin-2','a3d');
+@include i-class('meetup','a3e');
+@include i-class('vk','a3f');
+@include i-class('plancast','a40');
+@include i-class('disqus','a41');
+@include i-class('rss-2','a42');
+@include i-class('skype-1','a43');
+@include i-class('twitter-2','a44');
+@include i-class('youtube','a45');
+@include i-class('vimeo-1','a46');
+@include i-class('windows','a47');
+@include i-class('xing','a48');
+@include i-class('yahoo','a49');
+@include i-class('chrome','a4a');
+@include i-class('email','a4b');
+@include i-class('macstore','a4c');
+@include i-class('myspace','a4d');
+@include i-class('podcast','a4e');
+@include i-class('amazon','a4f');
+@include i-class('steam','a50');
+@include i-class('cloudapp','a51');
+@include i-class('dropbox-1','a52');
+@include i-class('ebay','a53');
+@include i-class('facebook-2','a54');
+@include i-class('github-2','a55');
+@include i-class('googleplay','a57');
+@include i-class('itunes','a58');
+@include i-class('plurk','a59');
+@include i-class('songkick','a5a');
+@include i-class('lastfm-1','a5b');
+@include i-class('gmail','a5c');
+@include i-class('pinboard','a5d');
+@include i-class('openid','a5e');
+@include i-class('quora','a5f');
+@include i-class('soundcloud-1','a60');
+@include i-class('tumblr-1','a61');
+@include i-class('eventasaurus','a62');
+@include i-class('wordpress','a63');
+@include i-class('yelp','a64');
+@include i-class('intensedebate','a65');
+@include i-class('eventbrite','a66');
+@include i-class('scribd','a67');
+@include i-class('posterous','a68');
+@include i-class('stripe','a69');
+@include i-class('pilcrow','a9c');
+@include i-class('opentable','a6a');
+@include i-class('cart','a6b');
+@include i-class('print-2','a6c');
+@include i-class('angellist','a6d');
+@include i-class('instagram-1','a6e');
+@include i-class('dwolla','a6f');
+@include i-class('appnet','a70');
+@include i-class('statusnet','a71');
+@include i-class('acrobat','a72');
+@include i-class('drupal','a73');
+@include i-class('buffer','a74');
+@include i-class('pocket','a75');
+@include i-class('github-circled-2','a56');
+@include i-class('bitbucket','a76');
+@include i-class('lego','a77');
+@include i-class('login-2','a78');
+@include i-class('stackoverflow','a79');
+@include i-class('hackernews','a7a');
+@include i-class('lkdto','a7b');
+@include i-class('info','81e');
+@include i-class('left-thin','88c');
+@include i-class('left-1','997');
+@include i-class('up-thin','88e');
+@include i-class('up-1','999');
+@include i-class('right-thin','88d');
+@include i-class('right-1','998');
+@include i-class('down-thin','88b');
+@include i-class('down-1','996');
+@include i-class('level-up','893');
+@include i-class('level-down','892');
+@include i-class('switch','896');
+@include i-class('infinity','8c2');
+@include i-class('plus-squared','818');
+@include i-class('minus-squared','81b');
+@include i-class('home-1','93c');
+@include i-class('home','821');
+@include i-class('keyboard','83a');
+@include i-class('erase','8c3');
+@include i-class('pause-1','9aa');
+@include i-class('pause','899');
+@include i-class('fast-fw','9af');
+@include i-class('fast-forward','89d');
+@include i-class('fast-backward','89e');
+@include i-class('fast-bw','9b0');
+@include i-class('to-end-1','9ab');
+@include i-class('to-end','89b');
+@include i-class('to-start','89c');
+@include i-class('to-start-1','9ad');
+@include i-class('hourglass','863');
+@include i-class('stop','898');
+@include i-class('stop-1','9a9');
+@include i-class('up-dir','886');
+@include i-class('up-dir-1','987');
+@include i-class('play-1','9a7');
+@include i-class('play','897');
+@include i-class('right-dir','885');
+@include i-class('right-dir-1','989');
+@include i-class('down-dir','883');
+@include i-class('down-dir-1','986');
+@include i-class('left-dir','884');
+@include i-class('left-dir-1','988');
+@include i-class('adjust','867');
+@include i-class('cloud-1','9bb');
+@include i-class('cloud','8b2');
+@include i-class('umbrella','9bd');
+@include i-class('star','808');
+@include i-class('star-1','923');
+@include i-class('star-empty','809');
+@include i-class('star-empty-1','924');
+@include i-class('check-1','9df');
+@include i-class('cup','846');
+@include i-class('left-hand','99b');
+@include i-class('up-hand','99c');
+@include i-class('right-hand','99a');
+@include i-class('down-hand','99d');
+@include i-class('menu','811');
+@include i-class('th-list','92f');
+@include i-class('moon','8b5');
+@include i-class('heart-empty-1','922');
+@include i-class('heart-empty','807');
+@include i-class('heart-1','921');
+@include i-class('heart','806');
+@include i-class('note','800');
+@include i-class('music-1','91d');
+@include i-class('note-beamed','801');
+@include i-class('layout','810');
+@include i-class('th','92e');
+@include i-class('flag-1','949');
+@include i-class('flag','82a');
+@include i-class('tools','856');
+@include i-class('cog','855');
+@include i-class('cog-1','96e');
+@include i-class('attention','83e');
+@include i-class('attention-1','95f');
+@include i-class('flash','8b4');
+@include i-class('flash-1','9bc');
+@include i-class('record','89a');
+@include i-class('cloud-thunder','8b3');
+@include i-class('cog-alt','96f');
+@include i-class('scissors','9d3');
+@include i-class('tape','8c8');
+@include i-class('flight','8b6');
+@include i-class('flight-1','9be');
+@include i-class('mail','805');
+@include i-class('mail-1','91f');
+@include i-class('edit','956');
+@include i-class('pencil','836');
+@include i-class('pencil-1','955');
+@include i-class('feather','837');
+@include i-class('check','812');
+@include i-class('ok','930');
+@include i-class('ok-circle','931');
+@include i-class('cancel','813');
+@include i-class('cancel-1','933');
+@include i-class('cancel-circled','814');
+@include i-class('cancel-circle','934');
+@include i-class('asterisk','9e3');
+@include i-class('cancel-squared','815');
+@include i-class('help','81c');
+@include i-class('attention-circle','960');
+@include i-class('quote','833');
+@include i-class('plus-circled','817');
+@include i-class('plus-circle','937');
+@include i-class('minus-circled','81a');
+@include i-class('minus-circle','939');
+@include i-class('right','881');
+@include i-class('direction','844');
+@include i-class('forward-1','951');
+@include i-class('forward','832');
+@include i-class('ccw-1','9a3');
+@include i-class('ccw','88f');
+@include i-class('cw','890');
+@include i-class('cw-1','9a2');
+@include i-class('left','880');
+@include i-class('up','882');
+@include i-class('down','87f');
+@include i-class('resize-vertical','97f');
+@include i-class('resize-horizontal','980');
+@include i-class('eject','9b1');
+@include i-class('list-add','8a6');
+@include i-class('list','8a5');
+@include i-class('left-bold','888');
+@include i-class('right-bold','889');
+@include i-class('up-bold','88a');
+@include i-class('down-bold','887');
+@include i-class('user-add','80c');
+@include i-class('star-half','925');
+@include i-class('ok-circle2','932');
+@include i-class('cancel-circle2','935');
+@include i-class('help-circle','93a');
+@include i-class('help-circled','81d');
+@include i-class('info-circle','93b');
+@include i-class('info-circled','81f');
+@include i-class('th-large','92d');
+@include i-class('eye','826');
+@include i-class('eye-1','943');
+@include i-class('eye-off','944');
+@include i-class('tag-1','945');
+@include i-class('tag','827');
+@include i-class('tags','946');
+@include i-class('camera-alt','92c');
+@include i-class('upload-cloud','82f');
+@include i-class('reply','830');
+@include i-class('reply-all','831');
+@include i-class('code','834');
+@include i-class('export','835');
+@include i-class('export-1','954');
+@include i-class('print','838');
+@include i-class('print-1','957');
+@include i-class('retweet-1','958');
+@include i-class('retweet','839');
+@include i-class('comment-1','959');
+@include i-class('comment','83b');
+@include i-class('chat','83c');
+@include i-class('chat-1','95a');
+@include i-class('vcard','840');
+@include i-class('address','841');
+@include i-class('location-1','961');
+@include i-class('location','842');
+@include i-class('map','843');
+@include i-class('compass','845');
+@include i-class('trash-1','962');
+@include i-class('trash','847');
+@include i-class('doc','848');
+@include i-class('doc-text-inv','84c');
+@include i-class('docs','849');
+@include i-class('doc-landscape','84a');
+@include i-class('archive','851');
+@include i-class('rss','853');
+@include i-class('share','857');
+@include i-class('basket','859');
+@include i-class('basket-1','971');
+@include i-class('shareable','858');
+@include i-class('login-1','973');
+@include i-class('login','85c');
+@include i-class('logout-1','974');
+@include i-class('logout','85d');
+@include i-class('volume','861');
+@include i-class('resize-full','869');
+@include i-class('resize-full-1','97c');
+@include i-class('resize-small','86a');
+@include i-class('resize-small-1','97e');
+@include i-class('popup','86b');
+@include i-class('publish','86c');
+@include i-class('window','86d');
+@include i-class('arrow-combo','86e');
+@include i-class('zoom-in','982');
+@include i-class('zoom-out','983');
+@include i-class('chart-pie','8c4');
+@include i-class('language','8ca');
+@include i-class('air','8ce');
+@include i-class('database','8d3');
+@include i-class('drive','8d4');
+@include i-class('bucket','8d5');
+@include i-class('thermometer','8d6');
+@include i-class('down-circled','86f');
+@include i-class('down-circle2','984');
+@include i-class('left-circled','870');
+@include i-class('right-circled','871');
+@include i-class('up-circled','872');
+@include i-class('up-circle2','985');
+@include i-class('down-open','873');
+@include i-class('down-open-1','98a');
+@include i-class('left-open-1','98b');
+@include i-class('left-open','874');
+@include i-class('right-open-1','98c');
+@include i-class('right-open','875');
+@include i-class('up-open','876');
+@include i-class('up-open-1','98d');
+@include i-class('arrows-cw','9a4');
+@include i-class('down-open-mini','877');
+@include i-class('play-circle2','9a8');
+@include i-class('left-open-mini','878');
+@include i-class('right-open-mini','879');
+@include i-class('to-end-alt','9ac');
+@include i-class('up-open-mini','87a');
+@include i-class('to-start-alt','9ae');
+@include i-class('down-open-big','87b');
+@include i-class('left-open-big','87c');
+@include i-class('right-open-big','87d');
+@include i-class('up-open-big','87e');
+@include i-class('progress-0','89f');
+@include i-class('progress-1','8a0');
+@include i-class('progress-2','8a1');
+@include i-class('progress-3','8a2');
+@include i-class('back-in-time','8aa');
+@include i-class('network','8ad');
+@include i-class('inbox-1','9b9');
+@include i-class('inbox','8af');
+@include i-class('install','8b0');
+@include i-class('font','9c1');
+@include i-class('bold','9c2');
+@include i-class('italic','9c3');
+@include i-class('text-height','9c4');
+@include i-class('text-width','9c5');
+@include i-class('align-left','9c6');
+@include i-class('align-center','9c7');
+@include i-class('align-right','9c8');
+@include i-class('align-justify','9c9');
+@include i-class('list-1','9ca');
+@include i-class('indent-left','9cb');
+@include i-class('indent-right','9cc');
+@include i-class('lifebuoy','8b9');
+@include i-class('mouse','8ba');
+@include i-class('dot','8bd');
+@include i-class('dot-2','8be');
+@include i-class('dot-3','8bf');
+@include i-class('off','9d7');
+@include i-class('suitcase','8bc');
+@include i-class('road','9d8');
+@include i-class('list-alt','9d9');
+@include i-class('flow-cascade','8d8');
+@include i-class('flow-branch','8d9');
+@include i-class('qrcode','9da');
+@include i-class('flow-tree','8da');
+@include i-class('barcode','9db');
+@include i-class('flow-line','8db');
+@include i-class('ajust','9dd');
+@include i-class('tint','9de');
+@include i-class('flow-parallel','8dc');
+@include i-class('brush','8c0');
+@include i-class('paper-plane','8b7');
+@include i-class('magnet-1','9e6');
+@include i-class('magnet','8c1');
+@include i-class('gauge','8de');
+@include i-class('traffic-cone','8df');
+@include i-class('cc','8e0');
+@include i-class('cc-by','8e1');
+@include i-class('cc-nc','8e2');
+@include i-class('cc-nc-eu','8e3');
+@include i-class('cc-nc-jp','8e4');
+@include i-class('cc-sa','8e5');
+@include i-class('cc-nd','8e6');
+@include i-class('cc-pd','8e7');
+@include i-class('cc-zero','8e8');
+@include i-class('cc-share','8e9');
+@include i-class('cc-remix','8ea');
+@include i-class('spin1','aa3');
+@include i-class('spin2','aa2');
+@include i-class('spin3','aa1');
+@include i-class('spin4','aa0');
+@include i-class('spin5','a9e');
+@include i-class('spin6','a9f');
+@include i-class('firefox','aa4');
+@include i-class('chrome-1','aa5');
+@include i-class('opera','aa6');
+@include i-class('ie-1','aa7');
+@include i-class('move','981');
+@include i-class('link-ext','93e');
+@include i-class('check-empty','9e0');
+@include i-class('bookmark-empty','948');
+@include i-class('phone-squared','96c');
+@include i-class('twitter-1','a0a');
+@include i-class('facebook-1','a0c');
+@include i-class('github-circled-1','a07');
+@include i-class('rss-1','96a');
+@include i-class('hdd','9eb');
+@include i-class('certificate','9ed');
+@include i-class('left-circled-1','99e');
+@include i-class('right-circled-1','99f');
+@include i-class('up-circled-1','9a0');
+@include i-class('down-circled-1','9a1');
+@include i-class('tasks','9ee');
+@include i-class('filter','9ef');
+@include i-class('resize-full-alt','97d');
+@include i-class('beaker','9f0');
+@include i-class('docs-1','964');
+@include i-class('blank','a13');
+@include i-class('menu-1','96d');
+@include i-class('list-bullet','9cd');
+@include i-class('list-numbered','9ce');
+@include i-class('strike','9cf');
+@include i-class('underline','9d0');
+@include i-class('table','9d1');
+@include i-class('magic','9f1');
+@include i-class('pinterest-circled-1','a0f');
+@include i-class('pinterest-squared','a10');
+@include i-class('gplus-squared','a11');
+@include i-class('gplus-1','a12');
+@include i-class('money','9f3');
+@include i-class('columns','9d2');
+@include i-class('sort','9f4');
+@include i-class('sort-down','9f5');
+@include i-class('sort-up','9f6');
+@include i-class('mail-alt','920');
+@include i-class('linkedin-1','a0e');
+@include i-class('gauge-1','9f8');
+@include i-class('comment-empty','95b');
+@include i-class('chat-empty','95c');
+@include i-class('sitemap','9f9');
+@include i-class('paste','9d4');
+@include i-class('lightbulb','97a');
+@include i-class('exchange','9a6');
+@include i-class('download-cloud','94e');
+@include i-class('upload-cloud-1','94f');
+@include i-class('user-md','9fe');
+@include i-class('stethoscope','9ff');
+@include i-class('suitcase-1','9d6');
+@include i-class('bell-alt','95e');
+@include i-class('coffee','9fb');
+@include i-class('food','9fc');
+@include i-class('doc-alt','965');
+@include i-class('building','a05');
+@include i-class('hospital','a04');
+@include i-class('ambulance','a00');
+@include i-class('medkit','a01');
+@include i-class('fighter-jet','9bf');
+@include i-class('beer','9fd');
+@include i-class('h-sigh','a02');
+@include i-class('plus-squared-1','a03');
+@include i-class('angle-double-left','992');
+@include i-class('angle-double-right','993');
+@include i-class('angle-double-up','994');
+@include i-class('angle-double-down','995');
+@include i-class('angle-left','98e');
+@include i-class('angle-right','98f');
+@include i-class('angle-up','990');
+@include i-class('angle-down','991');
+@include i-class('desktop','9b5');
+@include i-class('laptop','9b6');
+@include i-class('tablet','9b7');
+@include i-class('mobile-1','9b8');
+@include i-class('circle-empty','9e2');
+@include i-class('quote-left','952');
+@include i-class('quote-right','953');
+@include i-class('spinner','9fa');
+@include i-class('circle','9e1');
+@include i-class('reply-1','950');
+@include i-class('github-1','a08');
+@include i-class('folder-empty','968');
+@include i-class('folder-open-empty','969');
+@include i-class('github-squared','a06');
+@include i-class('facebook-3','a7c');
+@include i-class('github','8eb');
+@include i-class('facebook-rect','a7d');
+@include i-class('github-circled','8ec');
+@include i-class('twitter-3','a7e');
+@include i-class('twitter-bird','a7f');
+@include i-class('flickr','8ed');
+@include i-class('flickr-circled','8ee');
+@include i-class('twitter-squared','a09');
+@include i-class('icq','a88');
+@include i-class('yandex','a89');
+@include i-class('yandex-rect','a8a');
+@include i-class('vimeo','8ef');
+@include i-class('github-text','a85');
+@include i-class('vimeo-circled','8f0');
+@include i-class('github-3','a86');
+@include i-class('facebook-squared-1','a0b');
+@include i-class('googleplus-rect','a84');
+@include i-class('twitter','8f1');
+@include i-class('vkontakte-rect','a8b');
+@include i-class('twitter-circled','8f2');
+@include i-class('skype-2','a87');
+@include i-class('facebook','8f3');
+@include i-class('odnoklassniki','a8c');
+@include i-class('linkedin-squared','a0d');
+@include i-class('odnoklassniki-rect','a8d');
+@include i-class('facebook-circled','8f4');
+@include i-class('vimeo-rect','a81');
+@include i-class('facebook-squared','8f5');
+@include i-class('gplus','8f6');
+@include i-class('vimeo-2','a80');
+@include i-class('tumblr-rect','a83');
+@include i-class('gplus-circled','8f7');
+@include i-class('tumblr-2','a82');
+@include i-class('friendfeed','a8e');
+@include i-class('pinterest','8f8');
+@include i-class('friendfeed-rect','a8f');
+@include i-class('pinterest-circled','8f9');
+@include i-class('blogger-1','a90');
+@include i-class('tumblr','8fa');
+@include i-class('blogger-rect','a91');
+@include i-class('deviantart','a92');
+@include i-class('tumblr-circled','8fb');
+@include i-class('jabber','a93');
+@include i-class('lastfm-2','a94');
+@include i-class('linkedin','8fc');
+@include i-class('lastfm-rect','a95');
+@include i-class('linkedin-circled','8fd');
+@include i-class('linkedin-3','a96');
+@include i-class('linkedin-rect','a97');
+@include i-class('dribbble','8fe');
+@include i-class('dribbble-circled','8ff');
+@include i-class('picasa-1','a98');
+@include i-class('wordpress-1','a99');
+@include i-class('stumbleupon','900');
+@include i-class('instagram-2','a9a');
+@include i-class('instagram-filled','a9b');
+@include i-class('stumbleupon-circled','901');
+@include i-class('lastfm','902');
+@include i-class('lastfm-circled','903');
+@include i-class('rdio','904');
+@include i-class('rdio-circled','905');
+@include i-class('spotify','906');
+@include i-class('spotify-circled','907');
+@include i-class('qq','908');
+@include i-class('instagram','909');
+@include i-class('dropbox','90a');
+@include i-class('evernote','90b');
+@include i-class('flattr','90c');
+@include i-class('skype','90d');
+@include i-class('skype-circled','90e');
+@include i-class('renren','90f');
+@include i-class('sina-weibo','910');
+@include i-class('paypal','911');
+@include i-class('picasa','912');
+@include i-class('soundcloud','913');
+@include i-class('mixi','914');
+@include i-class('behance','915');
+@include i-class('google-circles','916');
+@include i-class('vkontakte','917');
+@include i-class('smashing','918');
+@include i-class('db-shape','91a');
+@include i-class('sweden','919');
+@include i-class('logo-db','91b');
+@include i-class('picture','80e');
+@include i-class('picture-1','92a');
+@include i-class('globe','8b1');
+@include i-class('globe-1','9ba');
+@include i-class('leaf-1','9c0');
+@include i-class('leaf','8b8');
+@include i-class('lemon','a14');
+@include i-class('glass','91c');
+@include i-class('gift','9e4');
+@include i-class('graduation-cap','8c9');
+@include i-class('mic','85e');
+@include i-class('videocam','929');
+@include i-class('headphones','978');
+@include i-class('palette','8a4');
+@include i-class('ticket','8cb');
+@include i-class('video-1','928');
+@include i-class('video','80d');
+@include i-class('target','8a3');
+@include i-class('target-1','9b2');
+@include i-class('music','802');
+@include i-class('trophy','8a8');
+@include i-class('award','9b4');
+@include i-class('thumbs-up','82b');
+@include i-class('thumbs-up-1','94a');
+@include i-class('thumbs-down','82c');
+@include i-class('thumbs-down-1','94b');
+@include i-class('bag','85a');
+@include i-class('user','80a');
+@include i-class('user-1','926');
+@include i-class('users-1','927');
+@include i-class('users','80b');
+@include i-class('lamp','864');
+@include i-class('alert','83f');
+@include i-class('water','8cc');
+@include i-class('droplet','8cd');
+@include i-class('credit-card','8cf');
+@include i-class('credit-card-1','9e8');
+@include i-class('monitor','8ab');
+@include i-class('briefcase-1','9d5');
+@include i-class('briefcase','8bb');
+@include i-class('floppy-1','9e9');
+@include i-class('floppy','8d0');
+@include i-class('cd','8ae');
+@include i-class('folder','850');
+@include i-class('folder-1','966');
+@include i-class('folder-open','967');
+@include i-class('doc-1','963');
+@include i-class('doc-text','84b');
+@include i-class('calendar-1','972');
+@include i-class('calendar','85b');
+@include i-class('chart-line','8c5');
+@include i-class('chart-bar-1','9e7');
+@include i-class('chart-bar','8c6');
+@include i-class('clipboard','8d1');
+@include i-class('pin','942');
+@include i-class('attach-1','93f');
+@include i-class('attach','823');
+@include i-class('bookmarks','829');
+@include i-class('book','84f');
+@include i-class('book-1','9dc');
+@include i-class('book-open','84e');
+@include i-class('phone','854');
+@include i-class('phone-1','96b');
+@include i-class('megaphone','8d2');
+@include i-class('megaphone-1','9ea');
+@include i-class('upload','82e');
+@include i-class('upload-1','94d');
+@include i-class('download-1','94c');
+@include i-class('download','82d');
+@include i-class('box','852');
+@include i-class('newspaper','84d');
+@include i-class('mobile','8ac');
+@include i-class('signal','8a7');
+@include i-class('signal-1','9b3');
+@include i-class('camera-1','92b');
+@include i-class('camera','80f');
+@include i-class('shuffle-1','9a5');
+@include i-class('shuffle','894');
+@include i-class('loop','895');
+@include i-class('arrows-ccw','891');
+@include i-class('light-down','865');
+@include i-class('light-up','866');
+@include i-class('mute','85f');
+@include i-class('volume-off','975');
+@include i-class('volume-down','976');
+@include i-class('volume-up','977');
+@include i-class('sound','860');
+@include i-class('battery','8a9');
+@include i-class('search','803');
+@include i-class('search-1','91e');
+@include i-class('key','8d7');
+@include i-class('key-1','9ec');
+@include i-class('lock','824');
+@include i-class('lock-1','940');
+@include i-class('lock-open-1','941');
+@include i-class('lock-open','825');
+@include i-class('bell-1','95d');
+@include i-class('bell','83d');
+@include i-class('bookmark','828');
+@include i-class('bookmark-1','947');
+@include i-class('link-1','93d');
+@include i-class('link','822');
+@include i-class('back','820');
+@include i-class('fire','9e5');
+@include i-class('flashlight','804');
+@include i-class('wrench','970');
+@include i-class('hammer','9f7');
+@include i-class('chart-area','8c7');
+@include i-class('clock-1','979');
+@include i-class('clock','862');
+@include i-class('rocket','8dd');
+@include i-class('truck','9f2');
+@include i-class('block','868');
+@include i-class('block-1','97b');

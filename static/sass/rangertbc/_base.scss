@@ -1,0 +1,130 @@
+// 
+// RangerTBC Specific Styles 
+//
+
+// Base File _base.scss
+// Version: 0.1
+// Created By: Andrew Senetar
+// Date: May, 22 2013
+// Used: 
+
+@import "rangertbc/settings";  //just to be reduntant and make sure the right one is loaded for now
+
+//// Global Mixins 
+
+//// Global Styles
+
+//// Element Styles
+body{
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: $body-bg;
+}
+
+.article {
+  & > article{ 
+    background-color: darken($body-bg, 5%);
+    padding-top: $topbar-height + 15px;
+    padding-bottom: emCalc(15px);
+    @include box-shadow(2px 2px 5px rgba(0,0,0,0.2));
+    header{
+      background-color: #ffffff;
+      border-bottom: 1px solid $secondary-color;
+      h1{
+        color: $primary-color;
+        @include text-shadow(2px 2px 2px rgba(0,0,0,0.3));
+      } 
+      time{
+        color: darken($secondary-color,20%);
+        font-weight: bold;
+        line-height: emCalc(18px); 
+        font-size: emCalc(18px);
+        padding-top: emCalc(10px);
+        paddting-bottom: emCalc(5px);
+        display: block;
+        text-align: right;
+      }
+    }
+    .content{
+      padding-top: emCalc(10px);
+      background-color: #f5f5f5;
+      padding-left: emCalc(5px);
+    }
+    footer{
+      background-color: #ffffff;
+      border-top: 1px solid $secondary-color;
+      padding-top: emCalc(7px);
+      padding-bottom: emCalc(10px);
+      color: darken($secondary-color, 20%);
+      border-bottom: solid 2px rgba(0,0,0,0.2);
+      a{
+        color: rgba($primary-color, 0.6); 
+      }
+    }
+  }
+  
+  & > aside{
+    & >.row > .columns {
+      background-color: #f5f5f5;
+      @include box-shadow(2px 2px 5px rgba(0,0,0,0.2));
+      & > div{
+        
+      }
+    }
+  }
+}
+
+.articleComments {
+  & > div {
+    background-color: #f5f5f5; 
+    @include box-shadow(2px 2px 5px rgba(0,0,0,0.2));
+    padding-top: emCalc(10px);
+  }
+}
+
+// fixing the aside in small view
+@media #{$small} {
+  .article > aside{
+    padding-top: $topbar-height + 15px; //mediaquery to remove on small?
+    & >.row > .columns {
+      background-color: inherit;
+      padding-right: 0;
+      @include box-shadow(none);
+      & > div{
+        @include box-shadow(2px 2px 5px rgba(0,0,0,0.2));
+        @include panel(#f5f5f5);
+      }
+    }
+  }
+}
+
+.articleInfo{
+  h5 {
+  text-align: center;
+  }
+}
+
+//custom footer
+body  #footer{
+  color: rgba($primary-color, 0.4); 
+  padding-top: emCalc(10px);
+  padding-bottom: emCalc(15px);
+  padding-right: emCalc(15px);
+  text-align: right;
+  a{
+    color: inherit;
+  }
+  a:hover{
+    color: rgba($primary-color, 0.8);
+  }
+}
+
+//// Components
+
+@import "rangertbc/components/topbar"; // topbar requires nav for menu
+@import "rangertbc/components/scrollbar"; // allows styling of window scrollbar (chrome only?)
+//@import "rangertbc/components/global"; // global styles and mixins
+
+@import "rangertbc/components/print"; // print styles (LAST)
