@@ -1,6 +1,9 @@
 Pelican-red
 ============
-Pelican-red is a [pelican](http://getpelican.com) theme originally created for my blog [rangerTBC](http://rangertbc.net).  I have added some additional features to what I required and am releasing it for anyone to use.  The theme is responsive using the [Foundation 4](http://foundation.zurb.com/) framework as a base.   
+
+**Currently NOT "Released" (AKA not ready yet)**
+
+Pelican-red is a [pelican](http://getpelican.com) theme originally created for the blog [rangerTBC](http://rangertbc.net).  The theme incorporates a few additional features in addition to the original design to make it more useful. The theme uses the [Foundation 4](http://foundation.zurb.com/) framework as a base and is Licensed under the MIT-License.     
 
 Features ( EDIT THIS )
 ---------
@@ -29,7 +32,7 @@ The following is a list of features:
 Install
 --------
 
-To install pelican-red first either clone the repository or download the zip of the current version to a destination of your choice (~/pelican-red used in example):
+To install pelican-red first either clone the repository or download the zip of the current version to a destination of your choice ( `~/pelican-red` used in example ):
 ~~~
 git clone https:// ~/pelican-red
 ~~~
@@ -40,7 +43,7 @@ extract
 ~~~
 The theme can then either be used by installing the theme or just by pointing to it.
 
-#### Option 1 - Install
+### Option 1 - Install
 Using pelican-themes (~/pelican-red is path to the theme used in previous example):
 ~~~
 pelican-themes --install ~/pelican-red
@@ -87,16 +90,16 @@ In addition to the additional configuration variables the theme supports the fol
 
 Previews
 ---------
-A live preview of the theme can be seen on my blog [rangerTBC](http://rangertbc.net). 
+A live preview of the theme can be seen on the blog [rangerTBC](http://rangertbc.net) as well as the gh-pages for pelican-red at [http://rangertbc.net/pelican-red](http://rangertbc.net/pelican-red). 
 
 Previews of the site main page are shown below as desktop and mobile.
 
 ### Desktop Preview
-INSERT SITE PREVIEW 
+INSERT SITE PREVIEW(s)
 
 ### Mobile Preview
-INSERT MOBILE PREVIEW
+INSERT MOBILE PREVIEW(s)
 
-Change-log ( Major Only)
+Change-log ( Major Details )
 -------------------------
 * `0.1.0` First Release
