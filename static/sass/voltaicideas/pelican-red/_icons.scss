@@ -1,0 +1,134 @@
+// 
+// Sass Icon Fonts
+//
+
+// Main File icons.scss
+// Version: 0.3
+// Created By: Andrew Senetar
+// Date: July, 13 2013
+// Used: Font Awesome Styles, Foundation Icon Fonts Scss as Starting; animation from Fontello
+
+@import "voltaicideas/pelican-red/iconSettings"; 
+
+@include face(#{$set}); //@font-face 
+
+//// global icon styles (from Foundation Icons + Font Awesome)
+
+[class*="#{$classPrefix}"] {
+  background-image: none;
+  background-position: 0% 0%;
+  background-repeat: repeat;
+  display: inline;
+  height: auto;
+  width: auto;
+  vertical-align: baseline;
+  line-height: 1;
+  margin-top: 0;
+  speak: none;
+  font-family: '#{$set}';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+[class*="#{$classPrefix}"]:before {
+  text-decoration: inherit;
+  display: inline-block;
+  speak: none;
+}
+
+//// Icon borders (from Font Awesome)
+
+[class*="border #{$classPrefix}"] {
+  border: solid 1px $iconBorderColor;
+  padding: .2em .25em .15em;
+  @include border-radius(3px);
+}
+
+//// Icon sizes (from Font Awesome)
+
+[class*="large #{$classPrefix}"]:before {
+  vertical-align: -10%;
+  font-size: 1.333em;
+}
+
+[class*="huge #{$classPrefix}"]:before {
+  vertical-align: -17%;
+  font-size: 1.75em;
+}
+
+[class*="2x #{$classPrefix}"] {
+  font-size: 2em;
+  & .border {
+    border-width: 2px;
+    @include border-radius(4px);
+  }
+}
+
+[class*="3x #{$classPrefix}"] {
+  font-size: 3em;
+  & .border {
+    border-width: 3px;
+    @include border-radius(5px);
+  }
+}
+
+[class*="4x #{$classPrefix}"] {
+  font-size: 4em;
+  & .border {
+    border-width: 4px;
+    @include border-radius(6px);
+  }
+}
+
+[class*="5x #{$classPrefix}"] {
+  font-size: 5em;
+  & .border {
+    border-width: 5px;
+    @include border-radius(7px);
+  }
+}
+
+//// Colors (from Font Awesome) 
+
+[class*="muted #{$classPrefix}"]{
+  color: $iconMuted;
+}
+
+[class*="light #{$classPrefix}"]{
+  color: $iconLight;
+}
+
+[class*="dark #{$classPrefix}"]{
+  color: $iconDark;
+}
+
+//// Fixes
+
+//// makes sure icons active on rollover in links (from Font Awesome)
+
+a [class*="#{$classPrefix}"]:before {
+  display: inline;
+}
+
+//// Animation for Spinners (from Fontello)
+
+@include keyframes(spin){
+  0%{
+    @include transform(rotate(0deg));
+  }
+  100%{
+    @include transform(rotate(359deg));
+  }
+}
+
+.animate-spin{
+  @include animation(spin 2s infinite linear);
+}
+
+//// Actual Icons 
+@import "voltaicideas/pelican-red/_iconList.scss"
+

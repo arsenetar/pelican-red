@@ -3,32 +3,33 @@
 //
 
 // Settings File _iconSettings.scss
-// Version: 0.2
+// Version: 0.3
 // Created By: Andrew Senetar
-// Date: May, 19 2013
+// Date: July, 13 2013
 // Used: Font Awesome Styles, Foundation Icon Fonts Scss as Starting; animation from Fontello
 
 //// Compass imports used later in icons.scss
 
 @import "compass/css3/font-face";
 @import "compass/css3/border-radius";
+@import "compass/css3/animation";
 @import "compass/css3/transform";
-@import "animation";
 
 //// Font and class variables
 
-$classPrefix: "icon-";      // icon class prefix [prefix-][name]
-$set: "fontello";           // font name
+$classPrefix: "icon-" !default;      // icon class prefix [prefix-][name]
+$set: "fontello" !default;           // font name
 
 //// Color Variables (from Font Awesome)
 
-$iconBorderColor:    #eee;
-$iconMuted:          #eee;
-$iconLight:          #fff;
-$iconDark:           #333;
+$iconBorderColor:    #eee !default;
+$iconMuted:          #eee !default;
+$iconLight:          #fff !default;
+$iconDark:           #333 !default;
 
 //// Mixin for creation of individual icon class 
-//// Use: @include i-class([name],[code]); (assumed to be working in the e[xxx] range)
+//// Use: @include i-class([name],[code]); (assumes \exxx space since its imposible? to output 
+//// \#{$pua} in Sass appearntly 
 
 @mixin i-class($name,$pua) {
   .#{$classPrefix}#{$name}:before { 
@@ -37,7 +38,7 @@ $iconDark:           #333;
 }
 
 //// Mixin for creation of individual icon class for Internet Explorer
-//// Use: @include i-class([name],[code]); (assumed to be working in the e[xxx] range)
+//// Use: @include i-class([name],[code]); (again exxx range)
 
 @mixin ie-class($name,$pua) {
   .#{$classPrefix}#{$name} { 
