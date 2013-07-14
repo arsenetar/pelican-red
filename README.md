@@ -11,7 +11,7 @@ The following is a list of features:
 
 * Responsive design view-able on mobile down to 380px wide **(check)**
 * Fixed top-bar w/drop-down navigation & social links
-    * Social links with Icons from [Entypo](http://www.entypo.com) by Daniel Bruce or [Zocial](http://zocial.smcllns.com/) by Sam Collins; currently supported ( icon pack in parenthesis:
+    * Social links with Icons from [Entypo](http://www.entypo.com) by Daniel Bruce or [Zocial](http://zocial.smcllns.com/) by Sam Collins; currently supported ( icon font pack in parenthesis ):
         * Blogger ( Zocial )
         * Dribbble ( Entypo )
         * Facebook ( Entypo )
@@ -36,12 +36,13 @@ The following is a list of features:
         * YouTube ( Zocial )
 * Style-sheets built using sass & compass 
 * zeptos.js used instead of jQuery when possible
-* Javascript files loaded via [RequireJS](http://requirejs.org/) from CDN [jsDelivr](http://www.jsdelivr.com/) with local fallback
-* Analytics via Google Analytics or GoSquared 
+* Javascript files loaded via [yepnope.js](http://yepnopejs.com/) (part of modernizr) from CDN [jsDelivr](http://www.jsdelivr.com/) with local fallback
+* Analytics via Google Analytics ( new version ) or GoSquared 
 * Disqus comments support **(TODO FINISH)** 
 * PDF link support
 * pygments code highlighting
 * Site Icons for Creative Commons Licenses, VCards, Tags, PDF download, Search, and Translation selection using [Entypo](http://www.entypo.com) by Daniel Bruce
+* Google Custom Search Support
 * more ...
 
 Install
@@ -127,10 +128,8 @@ Variables are listed as `variable` : description
 * `COMMENTS_ARTICLE`: Include Comments on articles set True/False
 
 ### Analytics ( Google Analytics and GoSquared )
-* `GA_CODE`: Google Analytics Code ( UA-xxxxxxxx-x )
-* `GA_DOMAIN`: Google Analytics Domain for use across sub-domains of a top level domain ( voltaicideas.net )
-* `GA_LINKER`: Google Analytics multiple top level domains set to True if wanted ( voltaicideas.net, voltaicideas.com, etc )
-* `GS_CODE`: GoSquared Code ( GSN-xxxxxx-x )
+* `GOOGLE_ANALYTICS`: Google Analytics Code and Domain ex. `( UA-xxxxxxxx-x' , 'voltaicideas.net' )`
+* `GO_SQUARED`: GoSquared Code ex. `'GSN-xxxxxx-x'`
 
 Per Article / Page Variables
 --------------------------
