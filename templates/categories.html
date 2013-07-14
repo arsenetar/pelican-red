@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
-  
+{% block title %}{{ super() }} - Categories{% endblock %}  
 {% block content %}
+<h1>Categories</h1>
+<ul class='no-bullet'>  
+{% for cat, articles in categories %}
+<li><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a> - 
+{{ articles|length }}{% if articles|length == 1 %} article {% else %} articles{% endif %}</li>
+{% endfor %}
+</ul>
 {% endblock %}

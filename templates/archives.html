@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
-  
+{% block title %}{{ super() }} - Archives{% endblock %}
+{% block content_title %}Archives{% endblock %}
 {% block content %}
+<ul class="no-bullet">
+{% for article in articles %}
+<li>{{ article.title|title }} - {{ article.date }}</li>
+{% endfor %}
+</ul>
 {% endblock %}

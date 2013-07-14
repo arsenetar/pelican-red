@@ -1,4 +1,4 @@
 {% extends 'base.html' %}
-  
-{% block content %}
-{% endblock %}
+{% block title %}{{ super() }} - {{author}}{% endblock %}
+{% block content_title %}{{author}}{% endblock %}
+

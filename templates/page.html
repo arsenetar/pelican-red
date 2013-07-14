@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
-  
+{% block title %}{{ super() }} - {{ page.title|title }}{% endblock %}  
+{% block content_title %}{{ page.title|title }}{% endblock %}
 {% block content %}
+{{ page.content }}
+<footer>
+{% include '_page_footer.html' %}
+</footer>
 {% endblock %}

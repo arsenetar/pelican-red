@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
-  
+{% block title %}{{ super() }} - {{ category.name|title }}{% endblock %}
+{% block content_title %}{{ category.name|title }}{% endblock %}
 {% block content %}
+{% for article in articles %}
+<article>
+<header><h1><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title|title }}</a></h1></header>
+        {{ article.summary }}
+    <footer>{{ article.author }}</footer>
+</article>
+{% endfor %}
 {% endblock %}
