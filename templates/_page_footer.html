@@ -1,0 +1,14 @@
+{#  Items to include at the bottom of a single page #}
+{# PDF links #}
+{% if PDF_PROCESSOR %}
+    <a href="{{ SITEURL }}/pdf/{{ page.slug }}.pdf">PDF</a>
+{% endif %}
+{# Copyright notice and link #}
+{% if COPYRIGHTS and (COPYRIGHT_PAGE or page.copyright) %}
+    <a href="{{ COPYRIGHTS[page.copyright|default(DEFAULT_COPYRIGHT)][1] }}">{{ COPYRIGHTS[page.copyright|default(DEFAULT_COPYRIGHT)][0] }}</a>
+{% endif %}
+{# Comments #}
+{% if ( page.comments == True or ( page.comments is not defined and COMMENTS_PAGE == True ) ) and  DISQUS_SN %}
+    {% include '_disqus.html' %}
+{% endif %}
+

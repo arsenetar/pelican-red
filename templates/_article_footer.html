@@ -1,0 +1,14 @@
+{#  Items to include at the bottom of a single article #}
+{# PDF links #}
+{% if PDF_PROCESSOR %}
+    <a href="{{ SITEURL }}/pdf/{{ article.slug }}.pdf">PDF</a>
+{% endif %}
+{# Copyright notice and link #}
+{% if COPYRIGHTS and (COPYRIGHT_ARTICLE or article.copyright) %}
+    <a href="{{ COPYRIGHTS[article.copyright|default(DEFAULT_COPYRIGHT)][1] }}">{{ COPYRIGHTS[article.copyright|default(DEFAULT_COPYRIGHT)][0] }}</a>
+{% endif %}
+{# Comments #}
+{% if ( article.comments == True or ( article.comments is not defined and COMMENTS_ARTICLE == True ) ) and  DISQUS_SN %}
+    {% include '_disqus.html' %}
+{% endif %}
+
