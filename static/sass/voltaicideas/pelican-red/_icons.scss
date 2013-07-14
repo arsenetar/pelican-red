@@ -10,10 +10,11 @@
 
 @import "voltaicideas/pelican-red/iconSettings"; 
 
+/* Icon Font */
 @include face(#{$set}); //@font-face 
 
 //// global icon styles (from Foundation Icons + Font Awesome)
-
+/* Icon font Styles */
 [class*="#{$classPrefix}"] {
   background-image: none;
   background-position: 0% 0%;
@@ -130,5 +131,6 @@ a [class*="#{$classPrefix}"]:before {
 }
 
 //// Actual Icons 
+/* Icon Font List */
 @import "voltaicideas/pelican-red/_iconList.scss"
 
