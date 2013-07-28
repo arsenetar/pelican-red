@@ -1,11 +1,30 @@
 {#  Items to include at the bottom of a single page #}
 {# PDF links #}
-{% if PDF_PROCESSOR %}
-    <a href="{{ SITEURL }}/pdf/{{ page.slug }}.pdf">PDF</a>
+{% if PDF %}
+<a href="{{ SITEURL }}/pdf/{{ page.slug }}.pdf" title="Download PDF"><i class="large icon-newspaper"></i></a>
 {% endif %}
 {# Copyright notice and link #}
 {% if COPYRIGHTS and (COPYRIGHT_PAGE or page.copyright) %}
-    <a href="{{ COPYRIGHTS[page.copyright|default(DEFAULT_COPYRIGHT)][1] }}">{{ COPYRIGHTS[page.copyright|default(DEFAULT_COPYRIGHT)][0] }}</a>
+    {% set copyright = page.copyright|default(DEFAULT_COPYRIGHT) %}
+<span>Page content licensed under: 
+    <a href="{{ COPYRIGHTS[copyright][1] }}" title="{{ COPYRIGHTS[copyright][0] }}">
+    {# Output creative commons icons instead of text #} 
+    {% if 'cc' in copyright %}
+    <i class="large icon-cc"></i>
+    <i class="large icon-cc-by"></i>
+        {% if 'nc' in copyright %}
+    <i class="large icon-cc-nc"></i>
+        {% endif %}
+        {% if 'sa' in copyright %}
+    <i class="large icon-cc-sa"></i>
+        {% elif 'nd' in copyright %}
+    <i class="large icon-cc-nd"></i>
+        {% endif %}
+    {% else %}
+    {{ COPYRIGHTS[copyright][0] }}
+    {% endif %}
+    </a>
+</span>
 {% endif %}
 {# Comments #}
 {% if ( page.comments == True or ( page.comments is not defined and COMMENTS_PAGE == True ) ) and  DISQUS_SN %}

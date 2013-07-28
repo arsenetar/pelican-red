@@ -30,7 +30,7 @@
   <script data="{{ SITEURL }}/theme/js/vendor/" src="{{ SITEURL }}/theme/js/vendor/custom.modernizr.js"></script>
 </head>
 <body>
-    <header class="fixed">
+    <header id="nav" class="contain-to-grid">
         <nav class="top-bar">
             <ul class="title-area">
                 <!-- Title Area -->
@@ -47,7 +47,7 @@
                   {% endfor %}                    
                   {% if DISPLAY_PAGES_ON_MENU != False %}
                     {% if DISPLAY_PAGES_ON_MENU == 'Compact' %}
-                        <li class="has-dropdown"><a href="">Pages</a>
+                        <li class="has-dropdown"><a href="#">Pages</a>
                             <ul class="dropdown">
                                 {% for p in PAGES %}
                                     <li {% if p == page %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
@@ -63,7 +63,7 @@
                   {% endif %}
                   {% if DISPLAY_CATEGORIES_ON_MENU != False %}
                     {% if DISPLAY_CATEGORIES_ON_MENU == 'Compact' %}
-                    <li class="has-dropdown"><a href="{{ SITEURL }}/categories.html">Categories</a>
+                    <li class="has-dropdown"><a href="#">Categories</a>
                             <ul class="dropdown">
                                 {% for cat, null in categories %}
                                     <li {% if cat == category %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
@@ -90,29 +90,42 @@
     </header>
     <!-- Content Area -->
     <div class="row">
-        <section class="large-9 columns">
-            <header>
-                <h1>{% block content_title %}{% endblock %}</h1>
-            </header>
-            {% block content %}
-            <ul class="no-bullet">
-                {% for article in articles_page.object_list %}
-                <li><article>
-                    <header><h1>{{ article.title|title }}</h1></header>
-                    {{ article.summary }}
-                    <footer>{{ article.author }}</footer>
-                </article></li>
-                {% endfor %}
+        <div id="main" class="large-13 columns push-3">
+            <section>
+                <header>
+                    <h1>{% block content_title %}{% endblock %}</h1>
+                    {% block content_image %}{% endblock %}
+                </header>
+                {% block content %}
+                    <ul class="no-bullet">
+                    {% for article in articles_page.object_list %}
+                        <li><article>
+                            <header><h1>{{ article.title|title }}</h1></header>
+                            {{ article.summary }}
+                            <footer>{{ article.author }}</footer>
+                        </article></li>
+                    {% endfor %}
+                    </ul>
+                {% endblock %}
+            </section>
+        </div>
+        <div id="mainAside" class="large-3 columns pull-13">
+        <aside>
+        {% block aside %}
+            <h3>Blog Links</h3>
+            <ul id='blogRoll' class="no-bullet">
+            {% for link in LINKS %}
+                <li><a href="{{ link[1] }}">{{ link[0] }}</a></li>
+            {% endfor %}
             </ul>
-            {% endblock %}
-        </section>
-        <aside class="large-3 columns">
-            {% block aside %}{% endblock %}
+        {% endblock %}
         </aside>
-    </div>
+        </div>
+      </div>
+
   <footer class="row">
-    <div class="large-12 columns" id="footer">
-      <span><a href="">&copy; {{ AUTHOR }} 2013</a></span>
+    <div class="large-16 columns" id="mainFooter">
+      <span>&copy; {{ AUTHOR }} 2013</span>
     </div>
   </footer>
   <script src="{{ SITEURL }}/theme/js/app.js"></script>

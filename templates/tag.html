@@ -1,4 +1,3 @@
 {% extends 'base.html' %}
-  
-{% block content %}
-{% endblock %}
+{% block title %}{{ (super) }} - {{ tag.name }} {% endblock %}
+{% block content_title %}{{ tag.name }}{% endblock %}  

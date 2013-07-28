@@ -25,8 +25,8 @@
 // @import "foundation/components/clearing";
 // @import "foundation/components/alert-boxes";
 // @import "foundation/components/breadcrumbs";
-// @import "foundation/components/keystrokes";
-// @import "foundation/components/labels";
+@import "foundation/components/keystrokes";
+@import "foundation/components/labels";
 @import "foundation/components/inline-lists";
 // @import "foundation/components/pagination";
 @import "foundation/components/panels";
@@ -55,28 +55,57 @@ body{ height: 100%; }
 
 //// Topbar fixes and media queries
 
-// Fix topbar .hover issue
-.top-bar {
-    margin-bottom: 0;
-    #searchInput {
-        width: 100%;
-    } 
-}
 .top-bar-section ul li.hover > a { background: $topbar-link-bg-hover; color: $topbar-link-color-hover; }
+
 @media #{$topbar-media-query} {
-    .top-bar{
+    #nav{
         @include box-shadow( 0 2px 2px rgba( 50, 50, 50, 0.4 ) );
-        .dropdown{
-            @include box-shadow( 0 2px 2px rgba( 50, 50, 50, 0.4 ) );
-        }
-        .name h1 a{
-            color: darken( $primary-color, 4% );
-            @include text-shadow( 0px 1px 0px rgba( 0, 0, 0, 0.3 ) );
-            &:hover {
-                color: #fff;
-            } 
+        .top-bar-section {    
+            .dropdown{
+                @include box-shadow( 0 2px 2px rgba( 50, 50, 50, 0.4 ) );
+            }
         }
     }
+}
+
+//// Area Styles
+body{ background-color: #fff; }
+
+#nav {
+    background-color: $topbar-bg;
+    margin-bottom: emCalc(10px);
+    .top-bar{ margin-bottom: 0; }
+}
+
+#main section, #mainAside aside {
+    background-color: #fff;
+    @include box-shadow(0 2px 5px rgba(0,0,0,0.2));
+}
+
+#main section {
+    padding: emCalc(10px) emCalc(7px) emCalc(7px) emCalc(12px);
+    header {
+        overflow: hidden;
+        margin-bottom: emCalc(7px);
+        h1 { margin-top: 0; margin-bottom: 0; }
+        border-bottom: 1px solid darken(#fff, 5%);
+    }
+}
+
+#mainAside {
+    font-size: 0.8em;
+    aside { 
+        padding: emCalc(10px) emCalc(7px); 
+    }
+}
+#blogRoll {
+    margin-left: 0;
+}
+
+#mainFooter {
+    margin-top: emCalc(10px);
+    color: #888;
+    font-size: 0.8em;
 }
 
 //// Component Styles
@@ -85,125 +114,40 @@ body{ height: 100%; }
         padding: 0 10px;
     }
 }
-#mainFooter {
-    font-size: 0.8em;
-    .no-bullet {
-        margin-left: 0;
+
+.tag-list {
+    @include inline-list;
+    li {
+        @include label(0, emCalc(16px), $secondary-color, $global-radius);
+        a {
+            padding: emCalc(7px) emCalc(7px);
+            color: #000;
+            span {
+                @include keystroke(lighten($secondary-color, 5%)); 
+                margin-left: emCalc(7px);
+            }
+        }
+        &:hover{
+            background-color: $primary-color;
+            a {
+                color: #fff;
+                span {
+                    border-color: darken($primary-color, 4%);
+                    background-color: lighten($primary-color, 7%);
+                    color: #fff;
+                }
+            }
+        }
     }
 }
 
-// Wiki Styling
-#mw-content {
-    padding: 0 0.6em;
-    margin-bottom: 1.25em;
-    article {
-        background-color: #fff;
-        padding: 0.5em 0.5em 0.5em 0.8em;
-        @include box-shadow( 0 0 0.5em rgba( 50, 50, 50, 0.4 ) );
-        @include border-radius( 2px );
-    }
-    a{ 
-        word-wrap: break-word; 
-        &.new {
-            color: $alert-color;
-        }
-    }
-    #mw-content-header {
-        h1 { 
-            border-bottom: 1px solid darken( $secondary-color, 10% ) 
-        }
-    }
-    #mw-content-text {
-        #toc {
-            margin-left: 1em;
-            float: right;
-            @extend .columns;
-            @extend .large-3;
-            font-size: 0.9em;
-            #toctitle {
-                font-size: 0.8em;
-                margin-left: 1em;
-                position: relative;
-                h2 {border: none;}
-                .toctoggle {
-                    position: absolute;
-                    right: 0;
-                    top: 1em;
-                }
-            }
-            
-            ul { @extend .no-bullet; margin-left: 1em; }
-        }
-        .mw-editsection{
-            float: right;
-            a{
-                color: $secondary-color;
-                &:hover {
-                    color: darken( $secondary-color, 10% );
-                }
-            }
-        }
-        h2 { border-bottom: 1px solid darken( $secondary-color, 10% ) }
-        pre { 
-            background-color: #f5f2f0;
-            margin: 0.5em 0;
-            padding: 1em;
-            overflow: auto;
-        }
-        
-        //History page
-        #pagehistory {
-            .selected {border: 1px solid darken( $secondary-color, 20% ); background-color: $secondary-color; }
-        }
-        
-        //Edit page
-        #editform{
-            textarea{
-                resize: vertical;
-                height: 400px;
-            }
-        }
-    
-    }
-    #catlinks {
-        @include border-radius( 3px );
-        @include panel( darken( #fff, 5% ), emCalc( 7px ) );
-        margin-bottom: 0;
-        ul { 
-            display: inline; 
-            margin-left: 0.5em;
-            li { display: inline-block; margin-right: 0.5em; }
-        }
-    }
-    .catlinks-allhidden{
-        display: none;
-    }
-}
 @media #{$small} {
-    #content-actions {
-        .inline-list {
-            li {
-                width: auto;
-                margin-left: 15px;
-                a { color: $primary-color; }
-            }
-            .selected a{ color: darken( $secondary-color, 10% ); }
-        }
-    }
-    #mw-content {
-    }
 }
 
 //// Print Visibility styling
-.printfooter, #siteSub{
-    display: none; 
-}
 @media print{
     body { padding-top: 0 !important; }
-    .printfooter, #siteSub{
-        display: block; 
-    }
-    #footerPlaces, #footerIcons, .top-bar, .editsection, .toctoggle, #content-actions, #messageArea, .mw-editsection{
+    .top-bar{
         display: none;
     }
 }

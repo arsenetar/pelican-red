@@ -1,5 +1,3 @@
-<ul class="social-area">
-  {% for network, url in SOCIAL %}
-    <li><a href="{{ url }}"><i class="huge icon-{{ network }}"></i></a></li>
-  {% endfor %}
-</ul>
+{% for network, url in SOCIAL %}
+<li><a href="{{ url }}" title="{{ network|title }}"><i class="huge icon-{{ network }}"></i></a></li>
+{% endfor %}
