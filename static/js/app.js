@@ -13,7 +13,7 @@ yepnope.errorTimeout = 3000; // set 3 second error timeout instead of 10
 // zeptojs or jquery
 Modernizr.load([{
   test: '__proto__' in {},
-  yep: 'http://cdn.jsdelivr.net/zepto/1.0/zepto.min.js',
+  yep: 'http://cdn.jsdelivr.net/foundation/4.3.1/js/vendor/zepto.js',
   nope: 'http://cdn.jsdelivr.net/jquery/1.10.2/jquery-1.10.2.min.js',
   complete: function() {
     if( !window.jQuery && !window.Zepto )
@@ -27,7 +27,7 @@ Modernizr.load([{
 
 // Foundation
 { 
-  load: 'http://cdn.jsdelivr.net/foundation/4.2.3/js/foundation.min.js',
+  load: 'http://cdn.jsdelivr.net/foundation/4.3.1/js/foundation.min.js',
   complete: function(){
     if(!window.Foundation)
       Modernizr.load([{
