@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}{{ super() }} - Archives{% endblock %}
-{% block content_title %}<a href="{{ SITEURL }}/archives.html" rel="bookmark" title="Permalink to archives">Archives</a>{% endblock %}
+{% block content_title %}<a href="{{ SITEURL }}/{{ page_name }}.html" rel="bookmark" title="Permalink to archives">Archives</a>{% endblock %}
 {% block content %}
-<dl class="article-list">
+<dl class="item-list">
 {% for article in articles %}
 <dt><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dt>
 <dd>Published: <abbr class="published" title="{{ article.date.isoformat() }}">{{ article.locale_date }}</abbr> by <a href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a></dd>

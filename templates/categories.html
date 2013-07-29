@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}{{ super() }} - Categories{% endblock %}  
+{% block content_title %}<a href="{{ SITEURL }}/{{ page_name }}.html" rel="bookmark">Categories</a>{% endblock %}
 {% block content %}
-<h1>Categories</h1>
-<ul class='no-bullet'>  
+<h2>Recent Articles by Category</h2>
 {% for cat, articles in categories %}
-<li><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a> - 
-{{ articles|length }}{% if articles|length == 1 %} article {% else %} articles{% endif %}</li>
+<h3><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></h3>
+<ul class="item-list">
+{% for article in articles[0:3] %}
+{% include '_list_item.html' %}
 {% endfor %}
+<p><a href="{{ SITEURL }}/{{ cat.url }}">View all articles in {{ cat }}...</a></p>
 </ul>
+{% endfor %}
 {% endblock %}
+

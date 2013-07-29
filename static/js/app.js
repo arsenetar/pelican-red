@@ -13,6 +13,11 @@ yepnope.errorTimeout = 3000; // set 3 second error timeout instead of 10
 function ready(){
     // Hack to fix .codehilitetable overflow
     $('.codehilitetable').wrap('<div class="codehilitewrapper">');
+    // Hack to make images more responsive and wrap with .th class
+    $('#main article img').each( function() {
+      $(this).css({'height': '', 'width': ''});
+      $(this).wrap('<a class="th" href="'+$(this).attr('src')+'" style="max-width:'+this.naturalWidth+'px">');
+    });
 };
 
 // zeptojs or jquery

@@ -1,0 +1,53 @@
+  {% set name = author.name|trim() %}
+  {% if name in AUTHORS %}
+  {% set props = AUTHORS[name] %}
+  {% endif %}
+  <li class="row">
+    <div class="author">
+      <div class="small-4 columns">
+        <a class="th" href="{{ SITEURL }}/{{ author.url }}">
+          {% if props %}
+          {% for key, value in props.vcard if key == 'photo' %}
+          <img src="{{ value }}" />
+          {% else %}
+          <img src="{{ SITEURL+'/'+FAVICON }}"/>
+          {% endfor %}
+          {% else %}
+          <img src="{{ SITEURL+'/'+FAVICON }}"/>
+          {% endif %}
+        </a>
+      </div>
+      <div class="small-12 columns">
+        <header>
+        <h3><a href="{{ SITEURL+'/'+author.url }}">{{ author }}</a></h3>
+        </header>
+        <ul class="vcard">
+          {% if props %}
+          {% for key, value in props.vcard if not key == 'photo' %}
+          <li class="{{key}}">
+          {% if key == 'email' %}
+          <a href="mailto:{{ value }}">{{ value }}</a>
+          {% elif key == 'url' %}
+          <a href="{{ value }}">{{ value }}</a>
+          {% elif key == 'notes' %}
+          <p>{{ value }}</p>
+          {% else %}
+          {{ value }}
+          {% endif %}
+          </li>
+          {% endfor %}
+          {% else %}
+          <li class="fn">{{ author }}</li>
+          <li class="url"><a href="{{ SITEURL+'/'+author.url }}">{{ SITEURL+'/'+author.url }}</a></li> 
+          {% endif %}
+        </ul>
+        {% if props %}
+        <ul class="inline-list">
+          {% for network, url in props.social %}
+          <li><a href="{{ url }}"><i class="huge icon-{{ network }}"></i></a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </li>

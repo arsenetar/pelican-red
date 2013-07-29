@@ -1,12 +1,16 @@
 {#  Items to include at the bottom of a single page #}
+<ul class='no-bullet'>
+{# Translations #}
+{% import '_translations.html' as translations with context %}
+{# translations.translations_for(page) }} #}
 {# PDF links #}
-{% if PDF %}
-<a href="{{ SITEURL }}/pdf/{{ page.slug }}.pdf" title="Download PDF"><i class="large icon-newspaper"></i></a>
+{% if PDF_GENERATOR %}
+<li><a href="{{ SITEURL }}/pdf/{{ page.slug }}.pdf" title="Download PDF"><i class="large icon-newspaper"></i> Download PDF</a>
 {% endif %}
 {# Copyright notice and link #}
-{% if COPYRIGHTS and (COPYRIGHT_PAGE or page.copyright) %}
+{% if COPYRIGHTS and ((COPYRIGHT_PAGE and DEFAULT_COPYRIGHT and page.copyright is not defined) or page.copyright) %}
     {% set copyright = page.copyright|default(DEFAULT_COPYRIGHT) %}
-<span>Page content licensed under: 
+<li>Page content licensed under: 
     <a href="{{ COPYRIGHTS[copyright][1] }}" title="{{ COPYRIGHTS[copyright][0] }}">
     {# Output creative commons icons instead of text #} 
     {% if 'cc' in copyright %}
@@ -24,8 +28,9 @@
     {{ COPYRIGHTS[copyright][0] }}
     {% endif %}
     </a>
-</span>
+</li>
 {% endif %}
+</ul>
 {# Comments #}
 {% if ( page.comments == True or ( page.comments is not defined and COMMENTS_PAGE == True ) ) and  DISQUS_SN %}
     {% include '_disqus.html' %}

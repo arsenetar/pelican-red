@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}{{ super() }} - {{ page.title|title }}{% endblock %}  
-{% block content_title %}{{ page.title|title }}{% endblock %}
+{% block content_title %}<a href="{{ SITEURL }}/{{ page.url }}" rel="bookmark">{{ page.title|title }}</a>{% endblock %}
 {% block content %}
+<article>
 {{ page.content }}
-<footer>
+</article>
+<footer class="page_footer">
 {% include '_page_footer.html' %}
 </footer>
 {% endblock %}

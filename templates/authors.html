@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
-  
+{% block content_title %}<a href="{{ SITEURL }}/{{ page_name }}.html" rel="bookmark">Authors</a>{% endblock %}
 {% block content %}
+{% if authors %}
+<ul class="item-list">
+  {% for author, articles  in authors %}
+  {% include '_author_item.html' %}
+  {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

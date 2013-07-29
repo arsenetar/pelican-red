@@ -77,14 +77,14 @@
           </li>
           {% endif %}
           {% if DISPLAY_PAGES_ON_MENU == 'Expanded' %}
-          {% for p in PAGES %}
+          {% for p in PAGES if not p.status == hidden %}
           <li {% if p == page %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
           {% endfor %}
           {% endif %}
           {% endif %}
           {% if DISPLAY_CATEGORIES_ON_MENU != False %}
           {% if DISPLAY_CATEGORIES_ON_MENU == 'Compact' %}
-          <li class="has-dropdown"><a href="#">Categories</a>
+          <li class="has-dropdown"><a>Categories</a>
             <ul class="dropdown">
               {% for cat, null in categories %}
               <li {% if cat == category %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
@@ -117,14 +117,18 @@
       <section>
         <header>
           <h1>{% block content_title %}{% endblock %}</h1>
+          <h2 class="print_header subheader">From: <a href="{{ SITEURL }}">{{ SITENAME }}</a></h2>
           {% block content_image %}{% endblock %}
         </header>
         {% block content %}
-        <ul class="article-list">
+        <ul class="item-list">
           {% for article in articles_page.object_list %}
           {% include '_list_item.html' %}
           {% endfor %}
         </ul>
+        {% if DEFAULT_PAGINATION and articles_paginator.num_pages>1 %}
+        {% include '_pagination.html' %}
+        {% endif %} 
         {% endblock %}
       </section>
     </div>
@@ -136,8 +140,20 @@
         {% endif %}
         <h3>Blog Links</h3>
         <ul id='blogRoll' class="no-bullet">
+          {% if INCLUDE_CATS_LINK %}
+          <li><a href="{{ SITEURL }}/categories.html">Categories</a></li>
+          {% endif %}
+          {% if INCLUDE_TAGS_LINK %}
+          <li><a href="{{ SITEURL }}/tags.html">Tags</a></li>
+          {% endif %}
+          {% if INCLUDE_ARCH_LINK %}
+          <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+          {% endif %}
+          {% if INCLUDE_AUTH_LINK %}
+          <li><a href="{{ SITEURL }}/authors.html">Authors</a></li>
+          {% endif %}
           {% for link in LINKS %}
-          <li><a href="{{ link[1] }}">{{ link[0] }}</a></li>
+          <li><a class="external" href="{{ link[1] }}">{{ link[0] }}</a></li>
           {% endfor %}
         </ul>
         {% endblock %}
@@ -146,6 +162,7 @@
   </div>
   <footer class="row">
     <div class="large-16 columns" id="mainFooter">
+      <span class="print_footer"><a href="{{ SITEURL }}/{{ output_file }}"> Fetched from: {{ output_file }}</a> on {{ NOW.isoformat() }}</span>
       <span>&copy; {{ AUTHOR }} 2013</span>
     </div>
   </footer>

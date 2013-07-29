@@ -1,0 +1,10 @@
+{% macro translations_for(article) %}
+{% if article.translations %}
+<li>Translations: 
+{% for translation in article.translations %}
+<a href="{{ SITEURL }}/{{ translation.url }}">{{ translation.lang }}</a>
+{% if not loop.last %},{% endif %}
+{% endfor %}
+</li>
+{% endif %}
+{% endmacro %}

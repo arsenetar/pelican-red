@@ -6,7 +6,7 @@
 <p>{{ SITE_DESCR }}</p>
 {% if articles and ARTICLES_ON_INDEX %}
 <h2>Recent Articles:</h2>
-<ul class="article-list">
+<ul class="item-list">
 {% for article in articles[0:ARTICLES_ON_INDEX] %}
 {% include '_list_item.html' %}
 {% endfor %}
