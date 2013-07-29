@@ -14,115 +14,136 @@
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ SITEURL }}/theme/css/app.css" />
+
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans' rel='stylesheet' type='text/css'> 
   
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON }}" /> 
 
   <!-- RSS/ATOM -->
-  {% if FEED -%}
+  {% if FEED_ATOM -%}
   <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
   {% endif %}
   {%if FEED_RSS -%}
   <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+  {% endif %}
+  {% if FEED_ALL_ATOM -%}
+  <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full ATOM Feed" />
+  {% endif %}
+  {%if FEED_ALL_RSS -%}
+  <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+  {% endif %}
+  {% if CATEGORY_FEED_ATOM and category -%}
+  <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_ATOM|format(category) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories ATOM Feed" />
+  {% endif %}
+  {%if CATEGORY_FEED_RSS and category -%}
+  <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_RSS|format(category) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+  {% endif %}
+  {% if TAG_FEED_ATOM and tag -%}
+  <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_ATOM|format(tag) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
+  {% endif %}
+  {%if TAG_FEED_RSS and tag -%}
+  <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(tag) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
   {% endif %}
   
   <!-- Modernizr -->
   <script data="{{ SITEURL }}/theme/js/vendor/" src="{{ SITEURL }}/theme/js/vendor/custom.modernizr.js"></script>
 </head>
 <body>
-    <header id="nav" class="contain-to-grid">
-        <nav class="top-bar">
-            <ul class="title-area">
-                <!-- Title Area -->
-                <li class="name">
-                    <h1><a href="{{ SITEURL }}">{{ SITENAME }}</a></h1>
-                </li>
-                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  <header id="nav" class="contain-to-grid">
+    <nav class="top-bar">
+      <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+          <h1><a href="{{ SITEURL }}">{{ SITENAME }}</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+      <!-- Menu -->
+        <ul class="left">
+          {% for item, url in MENUITEMS %}
+          <li><a href="{{ url }}">{{ item|title }}</a></li>
+          {% endfor %}                    
+          {% if DISPLAY_PAGES_ON_MENU != False %}
+          {% if DISPLAY_PAGES_ON_MENU == 'Compact' %}
+          <li class="has-dropdown"><a href="#">Pages</a>
+            <ul class="dropdown">
+              {% for p in PAGES %}
+              <li {% if p == page %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+              {% endfor %}
             </ul>
-            <section class="top-bar-section">
-                <!-- Menu -->
-                <ul class="left">
-                  {% for item, url in MENUITEMS %}
-                  <li><a href="{{ url }}">{{ item|title }}</a></li>
-                  {% endfor %}                    
-                  {% if DISPLAY_PAGES_ON_MENU != False %}
-                    {% if DISPLAY_PAGES_ON_MENU == 'Compact' %}
-                        <li class="has-dropdown"><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                {% for p in PAGES %}
-                                    <li {% if p == page %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-                                {% endfor %}
-                            </ul>
-                    {% endif %}
-                    {% if DISPLAY_PAGES_ON_MENU == 'Expanded' %}
-                        {% for p in PAGES %}
-                            <li {% if p == page %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-                        {% endfor %}
-                    {% endif %}
-                    </li>
-                  {% endif %}
-                  {% if DISPLAY_CATEGORIES_ON_MENU != False %}
-                    {% if DISPLAY_CATEGORIES_ON_MENU == 'Compact' %}
-                    <li class="has-dropdown"><a href="#">Categories</a>
-                            <ul class="dropdown">
-                                {% for cat, null in categories %}
-                                    <li {% if cat == category %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
-                                {% endfor %}
-                            </ul>
-                    {% endif %}
-                    {% if DISPLAY_CATEGORIES_ON_MENU == 'Expanded' %}
-                        {% for cat, null in categories %}
-                            <li {% if cat == category %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
-                        {% endfor %}
-                    {% endif %}
-                    </li>
-                  {% endif %}
-                  <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
-                </ul>
-                <!-- Social Links -->
-                <ul class="right">
-                    {% if SOCIAL %}
-                        {% include '_site_social.html' %}
-                    {% endif %}
-                </ul>
-            </section>
-        </nav>
-    </header>
-    <!-- Content Area -->
-    <div class="row">
-        <div id="main" class="large-13 columns push-3">
-            <section>
-                <header>
-                    <h1>{% block content_title %}{% endblock %}</h1>
-                    {% block content_image %}{% endblock %}
-                </header>
-                {% block content %}
-                    <ul class="no-bullet">
-                    {% for article in articles_page.object_list %}
-                        <li><article>
-                            <header><h1>{{ article.title|title }}</h1></header>
-                            {{ article.summary }}
-                            <footer>{{ article.author }}</footer>
-                        </article></li>
-                    {% endfor %}
-                    </ul>
-                {% endblock %}
-            </section>
-        </div>
-        <div id="mainAside" class="large-3 columns pull-13">
-        <aside>
-        {% block aside %}
-            <h3>Blog Links</h3>
-            <ul id='blogRoll' class="no-bullet">
-            {% for link in LINKS %}
-                <li><a href="{{ link[1] }}">{{ link[0] }}</a></li>
-            {% endfor %}
+          </li>
+          {% endif %}
+          {% if DISPLAY_PAGES_ON_MENU == 'Expanded' %}
+          {% for p in PAGES %}
+          <li {% if p == page %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+          {% endfor %}
+          {% endif %}
+          {% endif %}
+          {% if DISPLAY_CATEGORIES_ON_MENU != False %}
+          {% if DISPLAY_CATEGORIES_ON_MENU == 'Compact' %}
+          <li class="has-dropdown"><a href="#">Categories</a>
+            <ul class="dropdown">
+              {% for cat, null in categories %}
+              <li {% if cat == category %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
+              {% endfor %}
             </ul>
+          </li>
+          {% endif %}
+          {% if DISPLAY_CATEGORIES_ON_MENU == 'Expanded' %}
+          {% for cat, null in categories %}
+          <li {% if cat == category %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
+          {% endfor %}
+          {% endif %}
+          {% endif %}
+          <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+        </ul>
+        <!-- Social Links -->
+        <ul class="right">
+          {% if SOCIAL %}
+          {% for network, url in SOCIAL %}
+          <li><a href="{{ url }}" title="{{ network|title }}"><i class="huge icon-{{ network }}"></i></a></li>
+          {% endfor %}
+          {% endif %}
+        </ul>
+      </section>
+    </nav>
+  </header>
+  <!-- Content Area -->
+  <div class="row">
+    <div id="main" class="large-13 columns push-3">
+      <section>
+        <header>
+          <h1>{% block content_title %}{% endblock %}</h1>
+          {% block content_image %}{% endblock %}
+        </header>
+        {% block content %}
+        <ul class="article-list">
+          {% for article in articles_page.object_list %}
+          {% include '_list_item.html' %}
+          {% endfor %}
+        </ul>
         {% endblock %}
-        </aside>
-        </div>
-      </div>
-
+      </section>
+    </div>
+    <div id="mainAside" class="large-3 columns pull-13">
+      <aside>
+        {% block aside %}
+        {% if GOOGLE_SEARCH %}
+        {% include '_google_search.html' %}
+        {% endif %}
+        <h3>Blog Links</h3>
+        <ul id='blogRoll' class="no-bullet">
+          {% for link in LINKS %}
+          <li><a href="{{ link[1] }}">{{ link[0] }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endblock %}
+      </aside>
+    </div>
+  </div>
   <footer class="row">
     <div class="large-16 columns" id="mainFooter">
       <span>&copy; {{ AUTHOR }} 2013</span>
@@ -132,10 +153,26 @@
   
   <!-- Tracking Code -->
   {% if GOOGLE_ANALYTICS %}
-    {% include _google_analytics.html %}
+  {% include '_google_analytics.html' %}
   {% endif %}
   {% if GO_SQUARED %}
-    {% include _gosquared.html %}
+  {% include '_gosquared.html' %}
+  {% endif %}
+
+  <!-- Comment Count -->
+  {% if DISQUS_SN %}
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = '{{DISQUS_SN}}'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+  </script>
   {% endif %}
 </body>
 </html>

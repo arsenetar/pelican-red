@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}{{ super() }} - Archives{% endblock %}
-{% block content_title %}Archives{% endblock %}
+{% block content_title %}<a href="{{ SITEURL }}/archives.html" rel="bookmark" title="Permalink to archives">Archives</a>{% endblock %}
 {% block content %}
-<ul class="no-bullet">
+<dl class="article-list">
 {% for article in articles %}
-<li>{{ article.title|title }} - {{ article.date }}</li>
+<dt><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dt>
+<dd>Published: <abbr class="published" title="{{ article.date.isoformat() }}">{{ article.locale_date }}</abbr> by <a href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a></dd>
+{% if article.modified %}
+<dd>Last modified on: <abbr class="modified" title="{{article.modified}}">{{ article.modified }}</abbr></dd>
+{% endif %}
+<dd>Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></dd>
+{% if article.tags %}
+<dd>Tags: 
+{% for tag in article.tags %}
+<a href="{{ SITEURL }}/{{ tag.url }}">{{tag}}</a>
+{% if not loop.last %}
+,
+{% endif %} 
+{% endfor %}</dd>
+{% endif %}
 {% endfor %}
-</ul>
+</dl>
 {% endblock %}
