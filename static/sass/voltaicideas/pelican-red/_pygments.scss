@@ -1,0 +1,52 @@
+.codehilite{
+    font-size: emCalc(14px);
+    padding: emCalc(7px);
+    background-color: lighten($secondary-color, 8%);
+    border: 1px solid $secondary-color;
+    font-family: 'Source Code Pro', 'Consolas', Monaco, monospace;
+    overflow: auto;
+    margin-bottom: emCalc(16px);
+    pre{
+        tab-size: 4;
+        white-space: pre;
+        font-family: inherit;
+    }
+}
+
+div.codehilitewrapper{
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 1px solid $secondary-color;
+    margin-bottom: 1.25em;
+    table.codehilitetable{
+        margin: 0;
+        border: none;
+    }
+
+}
+
+table.codehilitetable{
+    td{ font-size: 1em; }
+    width: 100%;
+    .linenos{
+        width: emCalc(30px);
+        padding: 0;
+        .linenodiv{
+            padding: emCalc(7px);
+            overflow: auto;
+            font-family: 'Source Code Pro', 'Consolas', Monaco, monospace;
+            pre{
+                font-family: inherit;
+            } 
+        }
+    }
+    .code{
+        padding: 0;
+        .codehilite{
+            border-bottom: none;
+            border-top: none;
+            border-right: none;
+            margin: 0;
+        }
+    }
+}

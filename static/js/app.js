@@ -10,6 +10,11 @@ for( var i = 0, l = scripts.length; i < l; i++ ){
 
 yepnope.errorTimeout = 3000; // set 3 second error timeout instead of 10
 
+function ready(){
+    // Hack to fix .codehilitetable overflow
+    $('.codehilitetable').wrap('<div class="codehilitewrapper">');
+};
+
 // zeptojs or jquery
 Modernizr.load([{
   test: '__proto__' in {},
@@ -32,10 +37,14 @@ Modernizr.load([{
     if(!window.Foundation)
       Modernizr.load([{
         load: baseURL+'foundation.min.js',
-        complete: function() { $(document).foundation() },
+        complete: function() { 
+          $(document).foundation()
+          ready()
+        },
       }]);
     else {
       $(document).foundation()
+      ready()
     }
   }
 },
