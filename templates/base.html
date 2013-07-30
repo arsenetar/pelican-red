@@ -8,7 +8,7 @@
   {# Get a generic title element #}  
   {% set page_title = article.title if article else page.title if page else category.name if category else tag.name if tag else author.name if author else page_name|title %}
   {# fetch description, tags, author from article, page or CONFIGURATION file #}
-  {% set page_descrip = article.summary|striptags if article else page.summary|striptags if page else PAGE_DESC[title.lower()]|default(SITE_DESCR) if PAGE_DESC else SITE_DESCR %}
+  {% set page_descrip = article.summary|striptags if article else page.summary|striptags if page else PAGE_DESC[page_title.lower()]|default(SITE_DESCR) if PAGE_DESC else SITE_DESCR %}
   {% set page_tags = article.tags|join(', ') if (article and article.tags) else page.tags|join(', ') if (page and page.tags) else SITE_KEY %}
   {% set page_author = article.author if article else page.author if page else AUTHOR %}
   <meta name="description" itemprop="description" content="{{ page_descrip }}" />
