@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" itemscope itemtype="http://schema.org/WebPage" > <![endif]-->
+  <!--[if gt IE 8]><!--><html class="no-js" lang="{{ DEFAULT_LANG }}" itemscope itemtype="http://schema.org/WebPage"> <!--<![endif]-->
 <head>
   <!-- meta -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <meta name="description" content="{{ SITE_DESCR }}" />
-  <meta name="keywords" content="{{ SITE_KEY }}" />
-  <meta name="author" content="{{ AUTHOR }}" />
-  
+  {# Get a generic title element #}  
+  {% set page_title = article.title if article else page.title if page else category.name if category else tag.name if tag else author.name if author else page_name|title %}
+  {# fetch description, tags, author from article, page or CONFIGURATION file #}
+  {% set page_descrip = article.summary|striptags if article else page.summary|striptags if page else PAGE_DESC[title.lower()]|default(SITE_DESCR) if PAGE_DESC else SITE_DESCR %}
+  {% set page_tags = article.tags|join(', ') if (article and article.tags) else page.tags|join(', ') if (page and page.tags) else SITE_KEY %}
+  {% set page_author = article.author if article else page.author if page else AUTHOR %}
+  <meta name="description" itemprop="description" content="{{ page_descrip }}" />
+  <meta name="keywords" itemprop="keywords" content="{{ page_tags }}" />
+  <meta name="author" itemprop="author" content="{{ page_author }}" />
+  <meta name="organization" itemprop="sourceOrganization" content="{{ SITENAME }}"/>
+  <meta name="publisher" itemprop="publisher" content="{{ SITENAME }}"/>
+  <meta name="language" itemprop="inLanguage" content="{{ DEFAULT_LANG }}" />
+
   <!-- title -->
-  <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+  <title itemprop="name">{% block title %}{{ SITENAME }}{{ ' - '+page_title if not page_title.lower() =='index' }}{% endblock %}</title>
+  <meta itemprop="url" content="{{ SITEURL+'/'+output_file }}"/>
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ SITEURL }}/theme/css/app.css" />
@@ -19,109 +29,31 @@
   <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans' rel='stylesheet' type='text/css'> 
   
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON }}" /> 
+  <link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON }}" itemprop="thumbnailUrl"/> 
 
   <!-- RSS/ATOM -->
-  {% if FEED_ATOM -%}
-  <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
-  {% endif %}
-  {%if FEED_RSS -%}
-  <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
-  {% endif %}
-  {% if FEED_ALL_ATOM -%}
-  <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full ATOM Feed" />
-  {% endif %}
-  {%if FEED_ALL_RSS -%}
-  <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
-  {% endif %}
-  {% if CATEGORY_FEED_ATOM and category -%}
-  <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_ATOM|format(category) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories ATOM Feed" />
-  {% endif %}
-  {%if CATEGORY_FEED_RSS and category -%}
-  <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_RSS|format(category) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
-  {% endif %}
-  {% if TAG_FEED_ATOM and tag -%}
-  <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_ATOM|format(tag) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
-  {% endif %}
-  {%if TAG_FEED_RSS and tag -%}
-  <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(tag) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
-  {% endif %}
-  
+  {% include '_feeds.html' %}
+
   <!-- Modernizr -->
   <script data="{{ SITEURL }}/theme/js/vendor/" src="{{ SITEURL }}/theme/js/vendor/custom.modernizr.js"></script>
 </head>
 <body>
-  <header id="nav" class="contain-to-grid">
-    <nav class="top-bar">
-      <ul class="title-area">
-        <!-- Title Area -->
-        <li class="name">
-          <h1><a href="{{ SITEURL }}">{{ SITENAME }}</a></h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-      </ul>
-      <section class="top-bar-section">
-      <!-- Menu -->
-        <ul class="left">
-          {% for item, url in MENUITEMS %}
-          <li><a href="{{ url }}">{{ item|title }}</a></li>
-          {% endfor %}                    
-          {% if DISPLAY_PAGES_ON_MENU != False %}
-          {% if DISPLAY_PAGES_ON_MENU == 'Compact' %}
-          <li class="has-dropdown"><a href="#">Pages</a>
-            <ul class="dropdown">
-              {% for p in PAGES %}
-              <li {% if p == page %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-              {% endfor %}
-            </ul>
-          </li>
-          {% endif %}
-          {% if DISPLAY_PAGES_ON_MENU == 'Expanded' %}
-          {% for p in PAGES if not p.status == hidden %}
-          <li {% if p == page %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-          {% endfor %}
-          {% endif %}
-          {% endif %}
-          {% if DISPLAY_CATEGORIES_ON_MENU != False %}
-          {% if DISPLAY_CATEGORIES_ON_MENU == 'Compact' %}
-          <li class="has-dropdown"><a>Categories</a>
-            <ul class="dropdown">
-              {% for cat, null in categories %}
-              <li {% if cat == category %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
-              {% endfor %}
-            </ul>
-          </li>
-          {% endif %}
-          {% if DISPLAY_CATEGORIES_ON_MENU == 'Expanded' %}
-          {% for cat, null in categories %}
-          <li {% if cat == category %} class='active'{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
-          {% endfor %}
-          {% endif %}
-          {% endif %}
-          <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
-        </ul>
-        <!-- Social Links -->
-        <ul class="right">
-          {% if SOCIAL %}
-          {% for network, url in SOCIAL %}
-          <li><a href="{{ url }}" title="{{ network|title }}"><i class="huge icon-{{ network }}"></i></a></li>
-          {% endfor %}
-          {% endif %}
-        </ul>
-      </section>
-    </nav>
-  </header>
+  <!-- Navigation -->
+  {% include '_navigation.html' %}
   <!-- Content Area -->
   <div class="row">
     <div id="main" class="large-13 columns push-3">
       <section>
-        <header>
-          <h1>{% block content_title %}{% endblock %}</h1>
+        <header itemscope itemtype="http://schema.org/WPHeader">
+          {% block content_title %} 
+          <h1 itemprop="name"><a href="{{ SITEURL+'/'+output_file }}" rel="bookmark" title="Bookmark to {{ page_title }}">{{ page_title if not page_title.lower()=='index' else SITENAME }}</a></h1>
+          {% endblock %}
           <h2 class="print_header subheader">From: <a href="{{ SITEURL }}">{{ SITENAME }}</a></h2>
           {% block content_image %}{% endblock %}
         </header>
         {% block content %}
-        <ul class="item-list">
+        <ul class="item-list" itemscope itemtype="http://schema.org/ItemList">
+          <meta itemprop="name" content="Article List"/>
           {% for article in articles_page.object_list %}
           {% include '_list_item.html' %}
           {% endfor %}
@@ -133,37 +65,38 @@
       </section>
     </div>
     <div id="mainAside" class="large-3 columns pull-13">
-      <aside>
+      <aside itemscope itemtype="http://schema.org/WPSideBar">
+        <meta itemprop="name" content="{{ SITENAME }} Sidebar"/>
         {% block aside %}
         {% if GOOGLE_SEARCH %}
         {% include '_google_search.html' %}
         {% endif %}
         <h3>Blog Links</h3>
-        <ul id='blogRoll' class="no-bullet">
+        <ul id='blogRoll' class="no-bullet" itemscope itemtype="http://schema.org/ItemList">
           {% if INCLUDE_CATS_LINK %}
-          <li><a href="{{ SITEURL }}/categories.html">Categories</a></li>
+          <li itemprop="itemListElement"><a href="{{ SITEURL }}/categories.html">Categories</a></li>
           {% endif %}
           {% if INCLUDE_TAGS_LINK %}
-          <li><a href="{{ SITEURL }}/tags.html">Tags</a></li>
+          <li itemprop="itemListElement"><a href="{{ SITEURL }}/tags.html">Tags</a></li>
           {% endif %}
           {% if INCLUDE_ARCH_LINK %}
-          <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+          <li itemprop="itemListElement"><a href="{{ SITEURL }}/archives.html">Archives</a></li>
           {% endif %}
           {% if INCLUDE_AUTH_LINK %}
-          <li><a href="{{ SITEURL }}/authors.html">Authors</a></li>
+          <li itemprop="itemListElement"><a href="{{ SITEURL }}/authors.html">Authors</a></li>
           {% endif %}
           {% for link in LINKS %}
-          <li><a class="external" href="{{ link[1] }}">{{ link[0] }}</a></li>
+          <li itemprop="itemListElement"><a class="external" href="{{ link[1] }}">{{ link[0] }}</a></li>
           {% endfor %}
         </ul>
         {% endblock %}
       </aside>
     </div>
   </div>
-  <footer class="row">
+  <footer class="row" >
     <div class="large-16 columns" id="mainFooter">
       <span class="print_footer"><a href="{{ SITEURL }}/{{ output_file }}"> Fetched from: {{ output_file }}</a> on {{ NOW.isoformat() }}</span>
-      <span>&copy; {{ AUTHOR }} 2013</span>
+      &copy;<span itemprop="copyrightHolder"> {{ COPYRIGHT_HOLDER|default(AUTHOR) }} </span><span itemprop="copyrightYear">{{ COPYRIGHT_YEAR }}</span>
     </div>
   </footer>
   <script src="{{ SITEURL }}/theme/js/app.js"></script>
