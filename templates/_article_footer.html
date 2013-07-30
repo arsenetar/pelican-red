@@ -1,12 +1,86 @@
 {#  Items to include at the bottom of a single article #}
+<ul class='no-bullet no-margin'>
+{# Translations #}  
+{% import 'translations.html' as translations with context %}
+{{ translations.translations_for(article) }}   
 {# PDF links #}
-{% if PDF_PROCESSOR %}
-    <a href="{{ SITEURL }}/pdf/{{ article.slug }}.pdf">PDF</a>
+{% if PDF_GENERATOR %}
+<li><a href="{{ SITEURL }}/pdf/{{ article.slug }}.pdf" title="Download PDF"><i class="large icon-newspaper"></i> Download PDF</a>
 {% endif %}
 {# Copyright notice and link #}
-{% if COPYRIGHTS and (COPYRIGHT_ARTICLE or article.copyright) %}
-    <a href="{{ COPYRIGHTS[article.copyright|default(DEFAULT_COPYRIGHT)][1] }}">{{ COPYRIGHTS[article.copyright|default(DEFAULT_COPYRIGHT)][0] }}</a>
+{% if COPYRIGHTS and ((COPYRIGHT_ARTICLE and DEFAULT_COPYRIGHT and article.copyright is not defined) or article.copyright) %}
+    {% set copyright = article.copyright|default(DEFAULT_COPYRIGHT) %}
+<li>Article content licensed under: 
+    <a href="{{ COPYRIGHTS[copyright][1] }}" title="{{ COPYRIGHTS[copyright][0] }}">
+    {# Output creative commons icons instead of text #} 
+    {% if 'cc' in copyright %}
+    <i class="large icon-cc"></i>
+    <i class="large icon-cc-by"></i>
+        {% if 'nc' in copyright %}
+    <i class="large icon-cc-nc"></i>
+        {% endif %}
+        {% if 'sa' in copyright %}
+    <i class="large icon-cc-sa"></i>
+        {% elif 'nd' in copyright %}
+    <i class="large icon-cc-nd"></i>
+        {% endif %}
+    {% else %}
+    {{ COPYRIGHTS[copyright][0] }}
+    {% endif %}
+    </a>
+</li>
 {% endif %}
+{% if article.metadata.parts_articles %}
+<li class="pagination-centered"><ul class="parts pagination">
+  {% for part_article in article.metadata.parts_articles %}
+  {% if part_article == article %}
+  <li class="current"><a title="Current Article">{{ part_article.title }}</a></li>
+  {% else %}
+  <li><a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a></li>
+  {% endif %}
+  {% endfor %}
+</ul></li>
+{% endif %}
+<li class="author-details" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  {% if article.author.name in AUTHORS %}
+  {% set props = AUTHORS[article.author.name] %}
+  {% endif %}
+  <ul class="vcard brief row">
+    {% if props and props.vcard %}
+    <div class="small-4 columns">
+    {% for key, value in props.vcard if key=='photo' %}
+      <img src="{{ value }}" class="photo" itemprop="image" />
+    {% endfor %}
+  </div>
+  <div class="small-12 columns">
+    {% for key, value in props.vcard if key in ['fn', 'email', 'url', 'title', 'org']%}
+    {% if key == 'fn' %}
+    <li><a href="{{ SITEURL+'/'+article.author.url }}" itemprop="url"><span class="fn" itemprop="name">{{ value }}</span></a></li>
+    {% elif key == 'url' %}
+    <li class="url"><a itemprop="sameAs" href="{{ value }}">{{ value }}</a></li>
+    {% elif key == 'title' %}
+    <li class="title" itemprop="jobTitle">{{ value }}</li>
+    {% elif key == 'org' %}
+    <li class="org" itemprop="affiliation">{{ value }}</li>
+    {% else %}
+    <li class="{{ key }}" itemprop="{{ key }}">{{ value }}</li>
+    {% endif %}
+    {% endfor %}
+  </div>
+    {% else %}
+    <li><a class="url" href="{{ SITEURL+'/'+article.author.url }}" itemprop="url"></a><span class="fn" itemprop="name">{{ article.author.name }}</span></a></li>
+    <li itemprop="affiliation" class="org">{{ SITENAME }}</li>
+    {% endif %}
+  </ul>
+</li>
+<li><ul class="no-bullet no-margin">
+{% if article.prev_article %}
+<li class="left"><a href="{{ SITEURL }}/{{ article.prev_article.url}}">{{ article.prev_article.title }} (Older)</a></li>
+{% endif %}
+{% if article.next_article %}
+<li class="right"><a href="{{ SITEURL }}/{{ article.next_article.url}}">{{ article.next_article.title }} (Newer)</a></li>
+{% endif %}
+</ul></li>
 {# Comments #}
 {% if ( article.comments == True or ( article.comments is not defined and COMMENTS_ARTICLE == True ) ) and  DISQUS_SN %}
     {% include '_disqus.html' %}

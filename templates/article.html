@@ -1,10 +1,59 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} - {{article.title|title}} {% endblock %}  
-{% block content %}
-  <article>
-    <header><h1>{{ article.title|title }}</h1></header>
-    {{ article.content }}
-    <footer>{{ article.author }}</footer>
-    </article>
-    {% include '_article_footer.html' %}
+{% block content_image %}
+{% if article.image %}
+<a class="th" href="{{ SITEURL }}/static/{{article.image}}">
+  <img src="{{ SITEURL }}/static/{{ article.image }}"/>
+</a>
+{% endif %}
 {% endblock %}
+{% block content %}
+<article itemscope itemtype="http://schema.org/Article">
+{% if article.image %}
+<meta itemprop="image" content="{{ SITEURL }}/static/{{ article.image }}"/>
+{% endif %}
+<meta itemprop="description" content="{{ article.summary|striptags() }}"/>
+<meta itemprop="name" content="{{ article.title }}"/>
+<meta itemprop="url" content="{{ article.url }}"/>
+<meta itemprop="sourceOrganization" content="{{ SITENAME }}"/>
+<meta itemprop="inLanguage" content="{{ article.lang|default(DEFAULT_LANG) }}"/>
+<meta itemprop="wordCount" content="{{ article.content|striptags()|wordcount() }}" />
+<meta itemprop="copyrightHolder" content="{{ COPYRIGHT_HOLDER|default(article.author.name) }}"/>
+<div class="article-details">
+  <span class="published">Published on: <abbr title="{{ article.date.isoformat() }}" itemprop="datePublished">{{ article.locale_date }}</abbr></span>
+  <span class="category">In <a href="{{ article.category.url }}">{{ article.category.name }}</a></span>
+  {% if article.modified %}
+  <span class="modified">Last modified on: <abbr title="{{ article.modified }}" itemprop="dateModified">{{ article.modified }}</abbr></span>
+  {% endif %}
+{% if article.tags %}
+<div>
+  <meta itemprop="keywords" content="{{ article.tags|join(', ') }}"/>  
+  <span><a href="{{ SITEURL }}/tags.html"><i class="icon-tag"></i></a> </span>
+  <ul class="tag-list">
+  {% for tag in article.tags %}
+    <li><a href="{{ SITEURL+'/'+tag.url }}">{{ tag.name }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
+</div>
+<div itemprop="articleBody">
+  {{ article.content }}
+</div>
+<footer class="article_footer">
+{% include '_article_footer.html' %}
+</footer>
+{% endblock %}
+</article>
+
+{% block aside %}
+{{ super() }}
+{% if article.related_posts %}
+<h3>Related Posts</h3>
+<ul class="no-bullet no-margin">
+  {% for related_post in article.related_posts %}
+  <li><a href="{{ SITEURL }}/{{ related_post.url }}">{{ related_post.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
