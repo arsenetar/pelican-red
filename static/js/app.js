@@ -16,7 +16,7 @@ function ready(){
     // Hack to make images more responsive and wrap with .th class
     $('#main article img').each( function() {
       $(this).css({'height': '', 'width': ''});
-      $(this).wrap('<a class="th" href="'+$(this).attr('src')+'" style="max-width:'+this.naturalWidth+'px">');
+      $(this).wrap('<a class="th" href="'+$(this).attr('src')+'" style="max-width:'+Math.min(this.naturalWidth, 770)+'px">');
     });
 };
 
