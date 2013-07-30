@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} - {{ page.title|title }}{% endblock %}  
-{% block content_title %}<a href="{{ SITEURL }}/{{ page.url }}" rel="bookmark">{{ page.title|title }}</a>{% endblock %}
+{% block content_image %}
+{% if page.image %}
+<a class="th" href="{{ SITEURL }}/static/{{ article.image }}">
+  <img src="{{ SITEURL }}/static/{{ article.image }}" itemprop="image"/>
+</a>  
+{% endif %}
+{% endblock %}
 {% block content %}
-<article>
+<article itemprop="text">
 {{ page.content }}
 </article>
 <footer class="page_footer">

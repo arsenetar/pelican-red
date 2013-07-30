@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} - Archives{% endblock %}
-{% block content_title %}<a href="{{ SITEURL }}/{{ page_name }}.html" rel="bookmark" title="Permalink to archives">Archives</a>{% endblock %}
 {% block content %}
 <dl class="item-list">
 {% for article in articles %}
@@ -22,3 +20,4 @@
 {% endfor %}
 </dl>
 {% endblock %}
+

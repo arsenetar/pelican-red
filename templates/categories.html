@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} - Categories{% endblock %}  
-{% block content_title %}<a href="{{ SITEURL }}/{{ page_name }}.html" rel="bookmark">Categories</a>{% endblock %}
 {% block content %}
 <h2>Recent Articles by Category</h2>
 {% for cat, articles in categories %}
 <h3><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></h3>
-<ul class="item-list">
+<ul class="item-list" itemscope itemtype="http://schema.org/ItemList">
+  <meta itemprop="name" content="{{ cat }} recent articles"/>
 {% for article in articles[0:3] %}
 {% include '_list_item.html' %}
 {% endfor %}

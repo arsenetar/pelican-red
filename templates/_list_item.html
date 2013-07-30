@@ -1,15 +1,16 @@
-<li class="row">
+<li class="row" itemprop="itemListElement" itemscope itemtype="http://schema.org/Article">
   <div class="article">
     <div class="small-4 columns">
       {% if article.image %}
-      <a class="th" href="{{ SITEURL }}/{{ article.url }}"><img src="{{ SITEURL }}/static/{{article.image}}"/></a>
+      <a class="th" href="{{ SITEURL }}/{{ article.url }}"><img src="{{ SITEURL }}/static/{{article.image}}" itemprop="image" /></a>
       {% else %}
       <a class="th" href="{{ SITEURL }}/{{ article.url }}"><img src="{{ SITEURL }}/{{ FAVICON }}"/></a>
       {% endif %}
     </div>
     <div class="small-12 columns">
       <header>
-        <h3><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title|title }}</a></h3>
+        <h3 itemprop="headline"><a href="{{ SITEURL }}/{{ article.url }}" itemprop="url">{{ article.title|title }}</a></h3>
+        <meta itemprop="name" content="{{ article.title }}"/>
         {% if not category %}
         <div><span>Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></span></div>
         {% endif %}
@@ -30,9 +31,9 @@
       </div>
       <footer>
         <ul class="no-bullet">
-          <li>Published by <a href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a> on: <abbr class="published" title="{{ article.date.isoformat() }}">{{ article.locale_date }}</abbr></li>
+          <li>Published by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><a href="{{ SITEURL }}/{{ article.author.url }}" itemprop="url"><span itemprop="name">{{ article.author }}</span></a></span> on: <abbr class="published" title="{{ article.date.isoformat() }}" itemprop="datePublished">{{ article.locale_date }}</abbr></li>
           {% if article.modified %}
-          <li>Last Modified on: <abbr title="{{ article.modified }}">{{ article.modified }}</abbr></li>
+          <li>Last Modified on: <abbr title="{{ article.modified }}" itemprop="dateModified">{{ article.modified }}</abbr></li>
           {% endif %}
         </ul>      
       </footer>

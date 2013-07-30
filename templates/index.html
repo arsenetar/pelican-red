@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
-{% block content_title %}
-<a href="{{ SITEURL }}/index.html" rel="bookmark">{{ SITENAME }}</a>
-{% endblock %}
 {% block content %}
 <p>{{ SITE_DESCR }}</p>
 {% if articles and ARTICLES_ON_INDEX %}
 <h2>Recent Articles:</h2>
-<ul class="item-list">
+<ul class="item-list" itemscope itemtype="http://schema.org/ItemList">
+<meta name="Recent Articles"/>
 {% for article in articles[0:ARTICLES_ON_INDEX] %}
 {% include '_list_item.html' %}
 {% endfor %}

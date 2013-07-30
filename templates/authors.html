@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-{% block content_title %}<a href="{{ SITEURL }}/{{ page_name }}.html" rel="bookmark">Authors</a>{% endblock %}
 {% block content %}
 {% if authors %}
-<ul class="item-list">
+<ul class="item-list" itemscope itemtype="http://schema.org/ItemList">
+  <meta itemprop="name" content="Authors"/>
+  <meta itemprop="itemListOrder" content="Unordered"/>
   {% for author, articles  in authors %}
   {% include '_author_item.html' %}
   {% endfor %}
 </ul>
 {% endif %}
 {% endblock %}
+

@@ -2,13 +2,14 @@
   {% if name in AUTHORS %}
   {% set props = AUTHORS[name] %}
   {% endif %}
-  <li class="row">
+  <li class="row" itemprop="itemListElement" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="memberOf" content="{{ SITENAME }}" />
     <div class="author">
       <div class="small-4 columns">
         <a class="th" href="{{ SITEURL }}/{{ author.url }}">
           {% if props %}
           {% for key, value in props.vcard if key == 'photo' %}
-          <img src="{{ value }}" />
+          <img src="{{ value }}" itemprop="image" />
           {% else %}
           <img src="{{ SITEURL+'/'+FAVICON }}"/>
           {% endfor %}
@@ -23,22 +24,32 @@
         </header>
         <ul class="vcard">
           {% if props %}
-          {% for key, value in props.vcard if not key == 'photo' %}
+          {% for key, value in props.vcard %}
           <li class="{{key}}">
-          {% if key == 'email' %}
-          <a href="mailto:{{ value }}">{{ value }}</a>
+          {% if key == 'fn' %}
+          <span itemprop="name">{{ value }}</span>
+          {% elif key == 'email' %}
+          <a href="mailto:{{ value }}"itemprop="email">{{ value }}</a>
           {% elif key == 'url' %}
-          <a href="{{ value }}">{{ value }}</a>
-          {% elif key == 'notes' %}
-          <p>{{ value }}</p>
+          <a href="{{ value }}" itemprop="sameAs">{{ value }}</a>
+          {% elif key == 'note' %}
+          <div itemprop="description" <p>{{ value }}</p>
+          {% elif key == 'tel' %}
+          <span itemprop="telephone">{{ value }}</span>
+          {% elif key =='title' %}
+          <span itemprop="jobTitle">{{ value }}</span>
+          {% elif key == 'org' %}
+          <span itemprop="affiliation">{{ value }}</span>
+          {% elif key == 'photo' %}
+          <img class="photo" src="{{ value }}"/>
           {% else %}
-          {{ value }}
+          <span itemprop="{{ key }}">{{ value }}</span>
           {% endif %}
           </li>
           {% endfor %}
           {% else %}
-          <li class="fn">{{ author }}</li>
-          <li class="url"><a href="{{ SITEURL+'/'+author.url }}">{{ SITEURL+'/'+author.url }}</a></li> 
+          <li class="fn" itemprop="name">{{ author }}</li>
+          <li class="url"><a href="{{ SITEURL+'/'+author.url }}" itemprop="url" >{{ SITEURL+'/'+author.url }}</a></li> 
           {% endif %}
         </ul>
         {% if props %}
@@ -51,3 +62,4 @@
       </div>
     </div>
   </li>
+

@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} - {{author}}{% endblock %}
-{% block content_title %}<a href="{{ SITEURL }}/{{ author.url }}" rel="bookmark">{{author}}</a>{% endblock %}
 {% block content %}
-<ul class="item-list">
+<ul class="item-list featured" itemscope itemtype="http://schema.org/ItemList">
 {% include '_author_item.html' %}
 </ul>
 {{ super() }}
 {% endblock %}
+
