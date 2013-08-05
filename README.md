@@ -1,15 +1,13 @@
 Pelican-red
 ============
 
-**Beta Quality Pre-v0.1.0**
-
 Pelican-red is a [pelican](http://getpelican.com) theme designed to be readable on every device. It is a responsive layout which utilizes the [Foundation 4](http://foundation.zurb.com/) framework. The theme was originally created for the blog [VoltaicIdeas](http://blog.voltaicideas.net) and has a few additional features in addition to the original design to make it more useful. Pelican-red is Licensed under the MIT-License.     
 
 Features
 ---------
 The following is a list of features:
 
-* Responsive design view-able on mobile down to about 230px wide
+* Responsive design view-able on mobile down to about 300px wide
 * Top-bar w/drop-down navigation & social links
     * Social links with Icons from [Entypo](http://www.entypo.com) by Daniel Bruce or [Zocial](http://zocial.smcllns.com/) by Sam Collins; currently supported ( icon font pack in parenthesis ):
         * Blogger ( Zocial )
@@ -38,16 +36,17 @@ The following is a list of features:
 * zeptos.js used instead of jQuery when possible
 * Javascript files loaded via [yepnope.js](http://yepnopejs.com/) (part of modernizr) from CDN [jsDelivr](http://www.jsdelivr.com/) with local fallback
 * Analytics via Google Analytics ( new version ) or GoSquared 
-* Disqus comments support **(TODO FINISH)** 
-* PDF link support
+* Disqus comments support  
 * pygments code highlighting with responsive layout
 * Site Icons for Creative Commons Licenses, VCards, Tags, PDF download, Search, and Translation selection using [Entypo](http://www.entypo.com) by Daniel Bruce
-* Google Custom Search Support
+* Google Custom Search Support (works with overlay)
 * Open Sans used for style font
 * Source Code Pro used for code blocks
+* Vcards (hcards) and micro-formatting for articles, pages, and authors
 * Supports the following pelican-plugins (plus others):
   * multi_part
   * neighbors
+  * related_posts
 
 Install
 --------
@@ -91,16 +90,23 @@ Variables are listed as `variable` : description
 * `SITE_DESCR`: Description of site used for meta if you want
 * `SITE_KEY`: Keywords for meta ex. `"keyword1, keyword2, keyword3"`
 * `FAVICON`: Path to favicon ex. `images/favicon`
+* `PAGE_DESC` : a dictionary of page descriptions used to generate unique description meta on articles.html, authors.html, index.html, tags.html, and categories.html pages; keyed on lowercase page name.
+
+### Copyright
 * `COPYRIGHTS`: Copyright dictionary `['Abbreviation': ('name','url')]`
   * using `cc`, `cc-nc`, etc will generate iconified copyright links
 * `DEFAULT_COPYRIGHT` : Default copyright to use is an abbreviation key from the `COPYRIGHTS` dictionary 
 * `COPYRIGHT_ARTICLE` : Show default copyright on articles (over-ridable with article value)
 * `COPYRIGHT_PAGE` : Show default copyright on pages (over-ridable with page value)
+* `COPYRIGHT_HOLDER` : set the holder of the copyright, defaults to `AUTHOR`
+* `COPYRIGHT_YEAR` : set the copyright year, no default value
+
 
 ### Navigation
 * `MENUITEMS`: Custom Links to place in the menu e. `(('Item', 'Link'))`
 * `DISPLAY_PAGES_ON_MENU`: Show pages on the menu; has three options `False` - do not display, `Compact` - display as dropdown with 'Pages' Heading, and `Expanded` - display each as a seperate top level item.
 * `DISPLAY_CATEGORIES_ON_MENU` : Show the categories on the menu; has same options `False` - do not display, `Compact` - display as dropdown with 'Categories' Heading, and `Expanded` - display each as a seperate top level item.
+* `DISPLAY_ARCHIVE_ON_MENU` : True / False Show a link to the archive on the navigation menu
 
 ### Sidebar
 * `INCLUDE_TAGS_LINK` : True / False Include link to tags page on sidebar.
@@ -142,7 +148,7 @@ Variables are listed as `variable` : description
 * `COMMENTS_PAGE`: Include Comments on pages set True/False
 * `COMMENTS_ARTICLE`: Include Comments on articles set True/False
 
-### Authors ( vcards )
+### Authors ( vcards / hcards ) w/ microformats
 * `AUTHORS` : a dictionary of authors
   * `vcard` : a tuple of tuples of author vcard values support includes (not limited though ):
     * `fn` : Full Name
@@ -171,21 +177,28 @@ In addition to the additional configuration variables the theme supports the fol
 
 Previews
 ---------
-A live preview of the theme can be seen on the blog [VoltaicIdeas](http://blog.voltaicideas.net) as well as the gh-pages for pelican-red at [http://pelican-red.voltaicideas.net/](http:///pelican-red.voltaicideas.net). 
+A live preview of the theme can be seen on the blog [VoltaicIdeas](http://blog.voltaicideas.net). 
 
-Previews of the site main page are shown below as desktop and mobile.
+Previews of the site main page are shown below as desktop and mobile (bonus print preview of article).
 
-### Desktop Preview
-INSERT SITE PREVIEW(s)
+### Desktop Previews
+![Index Page](previews/index.png)
 
-### Mobile Preview
-INSERT MOBILE PREVIEW(s)
+![Article](previews/article.png)
+
+### Mobile Previews
+![Mobile Index](previews/index.mobile.png)
+
+![Mobile Article](previews/article.mobile.png)
+
+### Print Preview (print layout to be improved & disqus hidden)
+![Print Article](previews/article.print.png)
 
 TODO
 -----
 * Allow for multilevel MENUITEMS
-* Translations support (pages and articles)
+* Migrate some template hacks into pelican plugins
 
 Change-log ( Major Details )
 -------------------------
-* `v0.1.0` First Release
+* `v0.1.0` First Release <- Current
