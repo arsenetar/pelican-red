@@ -30,7 +30,7 @@
       </div>
       <footer>
         <ul class="no-bullet">
-          <li>Published by <<a href="{{ SITEURL }}/{{ article.author.url }}" >{{ article.author }}</a> on: <abbr class="published" title="{{ article.date.isoformat() }}">{{ article.locale_date }}</abbr></li>
+          <li>Published by <a href="{{ SITEURL }}/{{ article.author.url }}" >{{ article.author }}</a> on: <abbr class="published" title="{{ article.date.isoformat() }}">{{ article.locale_date }}</abbr></li>
           {% if article.modified %}
           <li>Last Modified on: <abbr title="{{ article.modified }}">{{ article.modified }}</abbr></li>
           {% endif %}
