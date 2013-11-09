@@ -7,26 +7,20 @@
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
-      <section class="top-bar-section" itemscope itemtype="http://schema.org/SiteNavigationElement">
-      <meta itemprop="name" content="{{ SITENAME }} Navigation"/>
+      <section class="top-bar-section">
       <!-- Menu -->
-      <ul class="left" itemscope itemtype="http://schema.org/ItemList">
-          <meta itemprop="name" content="{{ SITENAME }} Menu Items"/>
-          <meta itemprop="ItemListOrder" content="Unordered"/>
+      <ul class="left">
           {% for item, url in MENUITEMS %}
-          <li itemprop="itemListElement">
+          <li>
             <a href="{{ url }}">{{ item|title }}</a>
           </li>
           {% endfor %}                    
           {% if DISPLAY_PAGES_ON_MENU != False %}
           {% if DISPLAY_PAGES_ON_MENU == 'Compact' %}
-          <li class="has-dropdown" itemprop="itemListElement" itemscope itemtype="http://schema.org/ItemList"><a>Pages</a>
-            <meta itemprop="name" content="Pages"/>
-            <meta itemprop="url" content="{{SITEURL}}/Pages.html"/>
-            <meta itemprop="ItemListOrder" content="Unordered"/>
+          <li class="has-dropdown"><a>Pages</a>
             <ul class="dropdown">
               {% for p in PAGES if not p.status == 'hidden' %}
-              <li {% if p == page %} class='active'{% endif %} itemprop="itemListElement">
+              <li {% if p == page %} class='active'{% endif %}>
                 <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
               {% endfor %}
             </ul>
@@ -34,7 +28,7 @@
           {% endif %}
           {% if DISPLAY_PAGES_ON_MENU == 'Expanded' %}
           {% for p in PAGES if not p.status == 'hidden' %}
-          <li {% if p == page %} class='active'{% endif %} itemprop="itemListElement">
+          <li {% if p == page %} class='active'{% endif %}>
             <a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a>
           </li>
           {% endfor %}
@@ -42,13 +36,10 @@
           {% endif %}
           {% if DISPLAY_CATEGORIES_ON_MENU != False %}
           {% if DISPLAY_CATEGORIES_ON_MENU == 'Compact' %}
-          <li class="has-dropdown" itemprop="itemListElement" itemscope itemtype="http://schema.org/ItemList"><a>Categories</a>
-            <meta itemprop="name" content="Categories"/>
-            <meta itemprop="url" content="{{SITEURL}}/Categories.html"/>
-            <meta itemprop="ItemListOrder" content="Unordered"/>
+          <li class="has-dropdown"><a>Categories</a>
             <ul class="dropdown">
               {% for cat, null in categories %}
-              <li {% if cat == category %} class='active'{% endif %} itemprop="itemListElement">
+              <li {% if cat == category %} class='active'{% endif %}>
                 <a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name }}</a>
               </li>
               {% endfor %}
@@ -57,25 +48,23 @@
           {% endif %}
           {% if DISPLAY_CATEGORIES_ON_MENU == 'Expanded' %}
           {% for cat, null in categories %}
-          <li {% if cat == category %} class='active'{% endif %} itemprop="itemListElement">
+          <li {% if cat == category %} class='active'{% endif %}>
             <a href="{{ SITEURL }}/{{ cat.url }}">{}{ cat.name }}</a>
           </li>
           {% endfor %}
           {% endif %}
           {% endif %}
           {% if DISPLAY_ARCHIVE_ON_MENU %}
-          <li itemprop="itemListElement">
+          <li>
             <a href="{{ SITEURL }}/archives.html">Archives</a>
           </li>
           {% endif %}
         </ul>
         <!-- Social Links -->
         {% if SOCIAL %}
-        <ul class="right" itemscope itemtype="http://schema.org/ItemList">
-          <meta itemprop="name" content="site-social"/>
-          <meta itemprop="ItemListOrder" content="Unordered"/>
+        <ul class="right">
           {% for network, url in SOCIAL %}
-          <li itemprop="itemListElement"><a href="{{ url }}" title="{{ network|title }}"><i class="huge icon-{{ network }}"></i></a></li>
+          <li><a href="{{ url }}" title="{{ network|title }}"><i class="huge icon-{{ network }}"></i></a></li>
           {% endfor %}
         </ul>
         {% endif %}

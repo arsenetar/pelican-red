@@ -20,6 +20,7 @@
 <meta itemprop="copyrightHolder" content="{{ COPYRIGHT_HOLDER|default(article.author.name) }}"/>
 <div class="article-details">
   <span class="published">Published on: <abbr title="{{ article.date.isoformat() }}" itemprop="datePublished">{{ article.locale_date }}</abbr></span>
+  <span class="author">By <a href="{{ SITEURL+'/'+article.author.url }}" rel="author">{{ article.author,name }}</a></span>
   <span class="category">In <a href="{{ article.category.url }}">{{ article.category.name }}</a></span>
   {% if article.modified %}
   <span class="modified">Last modified on: <abbr title="{{ article.modified }}" itemprop="dateModified">{{ article.modified }}</abbr></span>
@@ -27,7 +28,7 @@
 {% if article.tags %}
 <div>
   <meta itemprop="keywords" content="{{ article.tags|join(', ') }}"/>  
-  <span><a href="{{ SITEURL }}/tags.html"><i class="icon-tag"></i></a> </span>
+  <span><a href="{{ SITEURL }}/tags.html"><i class="icon-tag"></i></a></span>
   <ul class="tag-list">
   {% for tag in article.tags %}
     <li><a href="{{ SITEURL+'/'+tag.url }}">{{ tag.name }}</a></li>

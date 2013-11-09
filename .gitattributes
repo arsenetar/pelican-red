@@ -3,4 +3,5 @@
 
 # Diff Settings
 *.html diff=html
-*.rb   diff=ruby
+*.rb diff=ruby
+*.php diff=php

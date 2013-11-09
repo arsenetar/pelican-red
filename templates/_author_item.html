@@ -2,7 +2,7 @@
   {% if name in AUTHORS %}
   {% set props = AUTHORS[name] %}
   {% endif %}
-  <li class="row" itemprop="itemListElement" itemscope itemtype="http://schema.org/Person">
+  <li class="row" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="memberOf" content="{{ SITENAME }}" />
     <div class="author">
       <div class="small-4 columns">
@@ -27,7 +27,7 @@
           {% for key, value in props.vcard %}
           <li class="{{key}}">
           {% if key == 'fn' %}
-          <span itemprop="name">{{ value }}</span>
+          <span class="fn" itemprop="name">{{ value }}</span>
           {% elif key == 'email' %}
           <a href="mailto:{{ value }}"itemprop="email">{{ value }}</a>
           {% elif key == 'url' %}

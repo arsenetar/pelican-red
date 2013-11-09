@@ -3,8 +3,7 @@
 <h2>Recent Articles by Category</h2>
 {% for cat, articles in categories %}
 <h3><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></h3>
-<ul class="item-list" itemscope itemtype="http://schema.org/ItemList">
-  <meta itemprop="name" content="{{ cat }} recent articles"/>
+<ul class="item-list">
 {% for article in articles[0:3] %}
 {% include '_list_item.html' %}
 {% endfor %}

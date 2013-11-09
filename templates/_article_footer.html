@@ -41,38 +41,6 @@
   {% endfor %}
 </ul></li>
 {% endif %}
-<li class="author-details" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  {% if article.author.name in AUTHORS %}
-  {% set props = AUTHORS[article.author.name] %}
-  {% endif %}
-  <ul class="vcard brief row">
-    {% if props and props.vcard %}
-    <div class="small-4 columns">
-    {% for key, value in props.vcard if key=='photo' %}
-      <img src="{{ value }}" class="photo" itemprop="image" />
-    {% endfor %}
-  </div>
-  <div class="small-12 columns">
-    {% for key, value in props.vcard if key in ['fn', 'email', 'url', 'title', 'org']%}
-    {% if key == 'fn' %}
-    <li><a href="{{ SITEURL+'/'+article.author.url }}" itemprop="url"><span class="fn" itemprop="name">{{ value }}</span></a></li>
-    {% elif key == 'url' %}
-    <li class="url"><a itemprop="sameAs" href="{{ value }}">{{ value }}</a></li>
-    {% elif key == 'title' %}
-    <li class="title" itemprop="jobTitle">{{ value }}</li>
-    {% elif key == 'org' %}
-    <li class="org" itemprop="affiliation">{{ value }}</li>
-    {% else %}
-    <li class="{{ key }}" itemprop="{{ key }}">{{ value }}</li>
-    {% endif %}
-    {% endfor %}
-  </div>
-    {% else %}
-    <li><a class="url" href="{{ SITEURL+'/'+article.author.url }}" itemprop="url"></a><span class="fn" itemprop="name">{{ article.author.name }}</span></a></li>
-    <li itemprop="affiliation" class="org">{{ SITENAME }}</li>
-    {% endif %}
-  </ul>
-</li>
 <li><ul class="no-bullet no-margin">
 {% if article.prev_article %}
 <li class="left"><a href="{{ SITEURL }}/{{ article.prev_article.url}}">{{ article.prev_article.title }} (Older)</a></li>

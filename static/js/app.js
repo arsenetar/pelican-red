@@ -23,7 +23,7 @@ function ready(){
 // zeptojs or jquery
 Modernizr.load([{
   test: '__proto__' in {},
-  yep: 'http://cdn.jsdelivr.net/foundation/4.3.1/js/vendor/zepto.js',
+  yep: 'http://cdn.jsdelivr.net/foundation/4.3.2/js/vendor/zepto.js',
   nope: 'http://cdn.jsdelivr.net/jquery/1.10.2/jquery-1.10.2.min.js',
   complete: function() {
     if( !window.jQuery && !window.Zepto )
@@ -37,7 +37,7 @@ Modernizr.load([{
 
 // Foundation
 { 
-  load: 'http://cdn.jsdelivr.net/foundation/4.3.1/js/foundation.min.js',
+  load: 'http://cdn.jsdelivr.net/foundation/4.3.2/js/foundation.min.js',
   complete: function(){
     if(!window.Foundation)
       Modernizr.load([{

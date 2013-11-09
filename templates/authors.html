@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% if authors %}
-<ul class="item-list" itemscope itemtype="http://schema.org/ItemList">
-  <meta itemprop="name" content="Authors"/>
-  <meta itemprop="itemListOrder" content="Unordered"/>
+<ul class="item-list">
   {% for author, articles  in authors %}
   {% include '_author_item.html' %}
   {% endfor %}

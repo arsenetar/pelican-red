@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" itemscope itemtype="http://schema.org/WebPage" > <![endif]-->
-  <!--[if gt IE 8]><!--><html class="no-js" lang="{{ DEFAULT_LANG }}" itemscope itemtype="http://schema.org/WebPage"> <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+  <!--[if gt IE 8]><!--><html class="no-js" lang="{{ DEFAULT_LANG }}"> <!--<![endif]-->
 <head>
   <!-- meta -->
   <meta charset="utf-8" />
@@ -11,16 +11,16 @@
   {% set page_descrip = article.summary|striptags if article else page.summary|striptags if page else PAGE_DESC[page_title.lower()]|default(SITE_DESCR) if PAGE_DESC else SITE_DESCR %}
   {% set page_tags = article.tags|join(', ') if (article and article.tags) else page.tags|join(', ') if (page and page.tags) else SITE_KEY %}
   {% set page_author = article.author if article else page.author if page else AUTHOR %}
-  <meta name="description" itemprop="description" content="{{ page_descrip }}" />
-  <meta name="keywords" itemprop="keywords" content="{{ page_tags }}" />
-  <meta name="author" itemprop="author" content="{{ page_author }}" />
-  <meta name="organization" itemprop="sourceOrganization" content="{{ SITENAME }}"/>
-  <meta name="publisher" itemprop="publisher" content="{{ SITENAME }}"/>
-  <meta name="language" itemprop="inLanguage" content="{{ DEFAULT_LANG }}" />
+  <meta name="description" content="{{ page_descrip }}" />
+  <meta name="keywords" content="{{ page_tags }}" />
+  <meta name="author" content="{{ page_author }}" />
+  <meta name="organization" content="{{ SITENAME }}"/>
+  <meta name="publisher" content="{{ SITENAME }}"/>
+  <meta name="language" content="{{ DEFAULT_LANG }}" />
 
   <!-- title -->
-  <title itemprop="name">{% block title %}{{ SITENAME }}{{ ' - '+page_title if not page_title.lower() =='index' }}{% endblock %}</title>
-  <meta itemprop="url" content="{{ SITEURL+'/'+output_file }}"/>
+  <title>{% block title %}{{ SITENAME }}{{ ' - '+page_title if not page_title.lower() =='index' }}{% endblock %}</title>
+  <meta content="{{ SITEURL+'/'+output_file }}"/>
   
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ SITEURL }}/theme/css/app.css" />
@@ -29,7 +29,7 @@
   <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans' rel='stylesheet' type='text/css'> 
   
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON }}" itemprop="thumbnailUrl"/> 
+  <link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON }}" /> 
 
   <!-- RSS/ATOM -->
   {% include '_feeds.html' %}
@@ -44,16 +44,15 @@
   <div class="row">
     <div id="main" class="large-13 columns push-3">
       <section>
-        <header itemscope itemtype="http://schema.org/WPHeader">
+        <header>
           {% block content_title %} 
-          <h1 itemprop="name"><a href="{{ SITEURL+'/'+output_file }}" rel="bookmark" title="Bookmark to {{ page_title }}">{{ page_title if not page_title.lower()=='index' else SITENAME }}</a></h1>
+          <h1><a href="{{ SITEURL+'/'+output_file }}" rel="bookmark" title="Bookmark to {{ page_title }}">{{ page_title if not page_title.lower()=='index' else SITENAME }}</a></h1>
           {% endblock %}
           <h2 class="print_header subheader">From: <a href="{{ SITEURL }}">{{ SITENAME }}</a></h2>
           {% block content_image %}{% endblock %}
         </header>
         {% block content %}
-        <ul class="item-list" itemscope itemtype="http://schema.org/ItemList">
-          <meta itemprop="name" content="Article List"/>
+        <ul class="item-list">
           {% for article in articles_page.object_list %}
           {% include '_list_item.html' %}
           {% endfor %}
@@ -65,28 +64,27 @@
       </section>
     </div>
     <div id="mainAside" class="large-3 columns pull-13">
-      <aside itemscope itemtype="http://schema.org/WPSideBar">
-        <meta itemprop="name" content="{{ SITENAME }} Sidebar"/>
+      <aside>
         {% block aside %}
         {% if GOOGLE_SEARCH %}
         {% include '_google_search.html' %}
         {% endif %}
         <h3>Blog Links</h3>
-        <ul id='blogRoll' class="no-bullet" itemscope itemtype="http://schema.org/ItemList">
+        <ul id='blogRoll' class="no-bullet">
           {% if INCLUDE_CATS_LINK %}
-          <li itemprop="itemListElement"><a href="{{ SITEURL }}/categories.html">Categories</a></li>
+          <li><a href="{{ SITEURL }}/categories.html">Categories</a></li>
           {% endif %}
           {% if INCLUDE_TAGS_LINK %}
-          <li itemprop="itemListElement"><a href="{{ SITEURL }}/tags.html">Tags</a></li>
+          <li><a href="{{ SITEURL }}/tags.html">Tags</a></li>
           {% endif %}
           {% if INCLUDE_ARCH_LINK %}
-          <li itemprop="itemListElement"><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+          <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
           {% endif %}
           {% if INCLUDE_AUTH_LINK %}
-          <li itemprop="itemListElement"><a href="{{ SITEURL }}/authors.html">Authors</a></li>
+          <li><a href="{{ SITEURL }}/authors.html">Authors</a></li>
           {% endif %}
           {% for link in LINKS %}
-          <li itemprop="itemListElement"><a class="external" href="{{ link[1] }}">{{ link[0] }}</a></li>
+          <li><a class="external" href="{{ link[1] }}">{{ link[0] }}</a></li>
           {% endfor %}
         </ul>
         {% endblock %}
@@ -96,7 +94,7 @@
   <footer class="row" >
     <div class="large-16 columns" id="mainFooter">
       <span class="print_footer"><a href="{{ SITEURL }}/{{ output_file }}"> Fetched from: {{ output_file }}</a> on {{ NOW.isoformat() }}</span>
-      &copy;<span itemprop="copyrightHolder"> {{ COPYRIGHT_HOLDER|default(AUTHOR) }} </span><span itemprop="copyrightYear">{{ COPYRIGHT_YEAR }}</span>
+      &copy;<span> {{ COPYRIGHT_HOLDER|default(AUTHOR) }} </span><span>{{ COPYRIGHT_YEAR }}</span>
     </div>
   </footer>
   <script src="{{ SITEURL }}/theme/js/app.js"></script>
