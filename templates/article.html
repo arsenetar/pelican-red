@@ -13,7 +13,7 @@
 {% endif %}
 <meta itemprop="description" content="{{ article.summary|striptags() }}"/>
 <meta itemprop="name" content="{{ article.title }}"/>
-<meta itemprop="url" content="{{ article.url }}"/>
+<meta itemprop="url" content="{{ SITEURL }}/{{ article.url }}"/>
 <meta itemprop="sourceOrganization" content="{{ SITENAME }}"/>
 <meta itemprop="inLanguage" content="{{ article.lang|default(DEFAULT_LANG) }}"/>
 <meta itemprop="wordCount" content="{{ article.content|striptags()|wordcount() }}" />
