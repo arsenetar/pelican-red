@@ -1,7 +1,7 @@
 Pelican-red
 ============
 
-Pelican-red is a [pelican](http://getpelican.com) theme designed to be readable on every device. It is a responsive layout which utilizes the [Foundation 4](http://foundation.zurb.com/) framework. The theme was originally created for the blog [VoltaicIdeas](http://blog.voltaicideas.net) and has a few additional features in addition to the original design to make it more useful. Pelican-red is Licensed under the MIT-License.     
+Pelican-red is a [pelican](http://getpelican.com) theme designed to be readable on every device. It is a responsive layout which utilizes the [Foundation 4](http://foundation.zurb.com/) framework. The theme was originally created for the blog [VoltaicIdeas](http://blog.voltaicideas.net) (no longer using this theme) and has a few additional features in addition to the original design to make it more useful. Pelican-red is Licensed under the MIT-License.     
 
 Features
 ---------
@@ -177,8 +177,6 @@ In addition to the additional configuration variables the theme supports the fol
 
 Previews
 ---------
-A live preview of the theme can be seen on the blog [VoltaicIdeas](http://blog.voltaicideas.net). 
-
 Previews of the site main page are shown below as desktop and mobile (bonus print preview of article).
 
 ### Desktop Previews
